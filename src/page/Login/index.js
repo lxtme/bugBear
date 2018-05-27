@@ -1,15 +1,24 @@
 import React, {Component} from 'react';
 import {Form, Input, Icon, Checkbox, Button} from 'antd';
 import './index.less';
+import {observer, inject} from 'mobx-react';
 
 const FormItem = Form.Item;
 
+@inject('stores')
+@observer
 class Login extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
                 if (!err) {
-                    console.log(values)
+                    console.log(values);
+                    const data = {
+                        email: values.email,
+                        password: values.password
+                    };
+                    console.log(this.props.stores);
+                    this.props.stores.userStore.login(data)
                 }
             }
         )
