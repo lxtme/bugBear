@@ -4,18 +4,16 @@ import './index.less';
 
 const FormItem = Form.Item;
 
-
 class Login extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
-            if(!err){
-                console.log(values)
-            }
+                if (!err) {
+                    console.log(values)
+                }
             }
         )
-    }
-    ;
+    };
 
     render() {
         const {getFieldDecorator} = this.props.form;
@@ -25,31 +23,23 @@ class Login extends Component {
                     <h1>BugBear</h1>
                     <p>BugBear 是一个实时的多平台的 bug 监控系统</p>
                     <div className="login-form">
-
                         <Form onSubmit={this.handleSubmit}>
                             <FormItem>
                                 {getFieldDecorator('email', {
-                                    rules: [{
-                                        type: 'email', message: 'The input is not valid E-mail'
-                                    },
-                                        {
-                                            required: true, message: 'Pleasse input your E-mail'
-                                        }]
+                                    rules: [
+                                        {type: 'email', message: '请输入正确的邮箱地址'},
+                                        {required: true, message: '请输入邮箱'}
+                                    ]
                                 })(
                                     <Input
                                         prefix={<Icon type="mail" style={{color: 'rgba(0,0,0,.25)'}}/>}
                                         placeholder="邮箱"/>
-                                )
-
-                                }
+                                )}
                             </FormItem>
                             <FormItem>
                                 {getFieldDecorator('password', {
-                                        rules: [{
-                                            required: true, message: 'Please input your password'
-                                        }]
-                                    }
-                                )(
+                                    rules: [{required: true, message: ' 请输入密码'}]
+                                })(
                                     <Input prefix={<Icon type="lock" style={{color: 'rgba(0,0,0,.25'}}/>}
                                            placeholder="密码"/>
                                 )}
