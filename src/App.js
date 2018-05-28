@@ -5,7 +5,7 @@ import {Provider, observer} from 'mobx-react';
 import stores from './stores';
 import Login from './page/Login'
 import Register from './page/Register';
-
+import Dashboard from './page/Dashboard';
 @observer
 class App extends Component {
     render() {
@@ -15,6 +15,7 @@ class App extends Component {
                     <div className="App">
                         <Route path="/login" component={Login}/>
                         <Route path="/register" component={Register}/>
+                        <Route path="/dashboard" component={Dashboard}/>
                     </div>
                 </Router>
             </Provider>
