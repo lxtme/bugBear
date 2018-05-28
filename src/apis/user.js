@@ -12,3 +12,11 @@ export async function login(data) {
     let response = await request.post('http://api.letsgo.tech/login', data);
     return response;
 }
+
+//注册
+export async function register(data){
+    return{
+        status:'success',
+        token:'fdhuiftwaogiwpjhgls;a'
+    }
+}

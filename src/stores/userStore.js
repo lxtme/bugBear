@@ -1,5 +1,5 @@
 import {observable} from 'mobx';
-import {login} from '../apis/user';
+import {login,register} from '../apis/user';
 import {message} from 'antd';
 
 class UserStore {
@@ -14,6 +14,17 @@ class UserStore {
         }
         else {
             message.error('登录失败')
+        }
+    }
+    async register(data){
+        const result=await register(data);
+        if (result.status==='success'){
+            message.success('注册成功');
+            this.token=result.token;
+            console.log('register token:', this.token)
+        }
+        else{
+            message.error('注册失败')
         }
     }
 }
