@@ -5,7 +5,6 @@ import {observer, inject} from 'mobx-react';
 
 const FormItem = Form.Item;
 
-//确认密码的函数还没写
 @inject('stores')
 @observer
 class Register extends Component {
@@ -25,6 +24,7 @@ class Register extends Component {
 
     render() {
         const {getFieldDecorator} = this.props.form;
+
         return (
             <div className="register-page">
                 <div className="register-box">

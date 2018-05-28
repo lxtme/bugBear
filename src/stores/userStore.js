@@ -23,7 +23,7 @@ class UserStore {
             this.token=result.token;
             console.log('register token:', this.token)
         }
-        else{
+        {
             message.error('注册失败')
         }
     }
