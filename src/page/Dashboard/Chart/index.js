@@ -1,21 +1,12 @@
 import React, {Component} from 'react';
 import {Button, DatePicker} from 'antd';
 import {AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer} from 'recharts';
+import {inject, observer} from 'mobx-react';
 
 const {RangePicker} = DatePicker;
 
-function onchange(date, dateString) {
-    console.log(date, dateString)
-}
-
-const data = [
-    {name: '周一', uv: 89},
-    {name: '周二', uv: 39},
-    {name: '周三', uv: 49},
-    {name: '周四', uv: 31},
-    {name: '周五', uv: 68}
-];
-
+@inject('stores')
+@observer
 class Chart extends Component {
     render() {
 
@@ -30,12 +21,13 @@ class Chart extends Component {
                         <Button>昨日</Button>
                         <Button>三日</Button>
                         <Button>本周</Button>
-                        <RangePicker onchange={onchange}/>
+                        <RangePicker onchange={this.props.stores.chartMobx.onchange}/>
                     </div>
                 </div>
                 <div className="dashboard-area-chart" style={{height: 300}}>
                     <ResponsiveContainer width='100%'>
-                        <AreaChart data={data} margin={{top: 10, right: 30, left: 0, bottom: 0}}>
+                        <AreaChart data={this.props.stores.chartMobx.data}
+                                   margin={{top: 10, right: 30, left: 0, bottom: 0}}>
                             <CartesianGrid strokeDasharray="3 3"/>
                             <XAxis dataKey="name"/>
                             <YAxis/>
