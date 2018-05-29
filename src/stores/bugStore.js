@@ -5,16 +5,18 @@ class BugStore {
     @observable bugs = [];
     @observable visible = false;
 
-    @observable ignore(key) {
+    ignore(key) {
         console.log(key)
     }
-
-    @observable comment(key) {
+    // ignore=(key)=>{
+    //     console.log(key)
+    // };
+    comment(key) {
         console.log(key);
         this.visible = true
     }
 
-    @observable hiddenModal() {
+    hiddenModal() {
         this.visible = false
     }
 
