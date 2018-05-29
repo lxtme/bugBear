@@ -6,6 +6,7 @@ import stores from './stores';
 import Login from './page/Login'
 import Register from './page/Register';
 import Dashboard from './page/Dashboard';
+
 @observer
 class App extends Component {
     render() {

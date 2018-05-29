@@ -26,8 +26,8 @@ class Chart extends Component {
                 </div>
                 <div className="dashboard-area-chart" style={{height: 300}}>
                     <ResponsiveContainer width='100%'>
-                        <AreaChart data={this.props.stores.chartMobx.data}
-                                   margin={{top: 10, right: 30, left: 0, bottom: 0}}>
+                        <AreaChart data={this.props.stores.chartMobx.data.slice()}
+                                   margin={{top: 10, right: 0, left: 0, bottom: 0}}>
                             <CartesianGrid strokeDasharray="3 3"/>
                             <XAxis dataKey="name"/>
                             <YAxis/>
