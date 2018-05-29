@@ -8,9 +8,6 @@ class BugStore {
     ignore(key) {
         console.log(key)
     }
-    // ignore=(key)=>{
-    //     console.log(key)
-    // };
     comment(key) {
         console.log(key);
         this.visible = true
