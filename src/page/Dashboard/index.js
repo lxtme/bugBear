@@ -9,6 +9,8 @@ class Dashboard extends Component {
         return (
             <div className="dashboard-page">
                 <Chart/>
+                <div className="dashboard-middle">
+                </div>
                 <Table/>
             </div>
         )

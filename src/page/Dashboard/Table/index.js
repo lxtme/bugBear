@@ -80,16 +80,14 @@ class Table extends Component {
                 key: 'operate',
                 render: (text, record) => (
                     <div>
-                        <a href="javascript:;"
-                           onClick={() => {
-                               message.success('该错误将不在展示，可以通过筛选状态已忽略查看');
-                               this.props.stores.bugStore.ignore(record.key)
-                           }
-                           }>忽略</a>
-                        <a href="javascript:;"
-                           onClick={() => {
-                               this.props.stores.bugStore.comment(record.key)
-                           }}>评论</a>
+                        <a onClick={() => {
+                            message.success('该错误将不在展示，可以通过筛选状态已忽略查看');
+                            this.props.stores.bugStore.ignore(record.key)
+                        }
+                        }>忽略</a>
+                        <a onClick={() => {
+                            this.props.stores.bugStore.comment(record.key)
+                        }}>评论</a>
                     </div>
                 )
             },
