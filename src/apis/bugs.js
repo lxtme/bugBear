@@ -28,13 +28,12 @@ export async function listBugs(data) {
                 message: 'uncaught error https://www.ideapar.com/',
                 account: 869,
                 userNum: 9877,
-                status:'已修复',
+                status: '已修复',
                 time: '5天前',
                 // operate: '忽略'
             },
         ]
     };
-
 
     let response = await request.get(`api.letsgo.tech/bugs?${buildQuery(data)}`);
     return response;
@@ -51,4 +50,14 @@ function buildQuery(data) {
     }
     queryString = queryString.substring(0, queryString.length - 1);
     return queryString
+}
+
+export async function comment(comment) {
+
+    return {
+        status: 'success'
+    };
+    let response = request.post('http://api.letsgo.tech/comment', comment);
+
+    return response;
 }

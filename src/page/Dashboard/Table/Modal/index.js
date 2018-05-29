@@ -11,7 +11,15 @@ class CommentModal extends Component {
         this.props.form.validateFields((err, value) => {
             if (!err) {
                 console.log('value:', value);
-            }
+                const key=this.props.stores.bugStore.commentKey;
+                console.log(key);
+                const comment={
+                    value:value.comment,
+                    key:key
+                };
+                console.log(comment);
+                this.props.stores.bugStore.comment(comment);
+    }
         });
         this.props.stores.bugStore.hiddenModal()
     }
