@@ -1,11 +1,9 @@
 import {observable} from 'mobx';
 
 class ChartMobx {
-
     @observable onchange(date, dateString) {
         console.log(date, dateString)
     }
-
     @observable data = [
         {name: '周一', uv: 89},
         {name: '周二', uv: 39},
