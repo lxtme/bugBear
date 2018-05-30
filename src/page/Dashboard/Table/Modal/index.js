@@ -18,7 +18,7 @@ class CommentModal extends Component {
                     key:key
                 };
                 console.log(comment);
-                this.props.stores.bugStore.comment(comment);
+                this.props.stores.bugStore.commentDate(comment);
     }
         });
         this.props.stores.bugStore.hiddenModal()
