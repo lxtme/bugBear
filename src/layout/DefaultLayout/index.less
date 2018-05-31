@@ -1,3 +1,7 @@
+.flex-row{
+  display: flex;
+  flex-direction: row;
+}
 .default-logo {
   height: 64px;
   background: rgb(11, 46, 81);
@@ -10,8 +14,7 @@
 
 .default-header {
   background: white;
-  display: flex;
-  flex-direction: row;
+  .flex-row;
   justify-content: space-between;
   align-items: center;
 }
@@ -21,8 +24,7 @@
 }
 
 .default-header-r {
-  display: flex;
-  flex-direction: row;
+  .flex-row;
   justify-content: flex-end;
   align-items: center;
   i,.default-avatar,.default-user-name {
@@ -32,4 +34,30 @@
 .default-content {
   margin: 32px;
   background: white;
+}
+.default-bell-box{
+  position:relative;
+}
+.bell-box{
+  position: absolute;
+  right: 0;
+  top: 64px;
+  z-index: 1;
+  background: white;
+  border: 1px solid #e6eee3;
+  border-radius: 5px;
+  .bell-list{
+    padding:0;
+    margin:0;
+  }
+  .bell-item{
+    border-bottom:1px solid #e8dfdc;
+    line-height: 25px;
+    list-style: none;
+    padding:20px;
+  }
+  .bell-clear{
+    width: 100%;
+    border:none;
+  }
 }

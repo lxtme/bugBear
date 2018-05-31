@@ -29,7 +29,7 @@ class BugStore {
         }
     }
 
-    async comment(commentDate) {
+    async commentDate(commentDate) {
         const result=await comment(commentDate);
         if(result.status==='success'){
             message.success('评论成功')
