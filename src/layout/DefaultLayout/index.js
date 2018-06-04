@@ -52,7 +52,7 @@ class DefaultLauout extends Component {
                                 <Icon type='warning'/>
                                 <span>日历</span>
                             </MenuItem>
-                            <SubMenu key="sub1" title={<span><Icon type="warning"/><span>设置</span></span>}>
+                            <SubMenu key="setting" title={<span><Icon type="warning"/><span>设置</span></span>}>
                                 <MenuItem key='8'>
                                     <Link to='./profile'>
                                         <Icon type='user'/>

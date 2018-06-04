@@ -5,7 +5,7 @@ import {message} from 'antd';
 class ProfileStore {
     constructor() {
         for (let i = 0; i < 6; i++) {
-            this.teamNumber.push({
+            this.teamMember.push({
                 key: i,
                 name: 'lixiao' + i,
                 email: 'bugbear@email.com',
@@ -17,7 +17,7 @@ class ProfileStore {
     }
 
     @observable visible = false;
-    @observable teamNumber = [];
+    @observable teamMember = [];
 
     showModal() {
         this.visible = true
@@ -30,10 +30,9 @@ class ProfileStore {
     deleteMember(record) {
         console.log(record);
         console.log(record.key);
-        const index = this.teamNumber.indexOf(record);
+        const index = this.teamMember.indexOf(record);
         console.log(index);
-        this.teamNumber.splice(index, 1)
-        // this.teamNumber.splice(record.key,1)
+        this.teamMember.splice(index, 1)
     };
 
     async profileSet(profileData) {

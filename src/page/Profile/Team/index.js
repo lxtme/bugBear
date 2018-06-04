@@ -56,7 +56,7 @@ class Team extends Component {
                     <span className="profile-title">团队成员</span>
                     <span className="profile-btn"><a>编辑</a></span>
                     <Alert type="info" message="共13人" showIcon style={{width: 1200}}/>
-                    <Table dataSource={this.props.stores.profileStore.teamNumber.slice()} columns={teamColumns}
+                    <Table dataSource={this.props.stores.profileStore.teamMember.slice()} columns={teamColumns}
                            style={{width: 1200}}/>
                 </div>
                 <TeamModal visible={this.props.stores.profileStore.visible}/>
