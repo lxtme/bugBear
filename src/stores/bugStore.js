@@ -1,5 +1,5 @@
 import {observable} from 'mobx';
-import {listBugs,comment} from "../apis/bugs";
+import {listBugs, comment} from "../apis/bugs";
 import {message} from 'antd';
 
 class BugStore {
@@ -8,8 +8,11 @@ class BugStore {
 
     commentKey = '';
 
-    ignore(key) {
-        console.log(key)
+    ignore(record) {
+        console.log(record);
+        const index = this.bugs.indexOf(record);
+        console.log(index);
+        this.bugs.splice(index, 1)
     }
 
     comment(key) {
@@ -30,8 +33,8 @@ class BugStore {
     }
 
     async commentDate(commentDate) {
-        const result=await comment(commentDate);
-        if(result.status==='success'){
+        const result = await comment(commentDate);
+        if (result.status === 'success') {
             message.success('评论成功')
         }
     }

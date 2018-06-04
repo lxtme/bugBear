@@ -3,6 +3,7 @@ import ChartMobx from './chartMobx';
 import BugStore from './bugStore';
 import DefaultStore from "./defaultStore";
 import BellStore from "./bellStore";
+import ProfileStore from "./ProfileStore";
 
 class stores{
     constructor(){
@@ -11,6 +12,7 @@ class stores{
         this.bugStore=new BugStore();
         this.defaultStore=new DefaultStore();
         this.bellStore=new BellStore();
+        this.profileStore=new ProfileStore();
     }
 
 }

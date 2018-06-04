@@ -82,7 +82,7 @@ class Table extends Component {
                     <div>
                         <a onClick={() => {
                             message.success('该错误将不在展示，可以通过筛选状态已忽略查看');
-                            this.props.stores.bugStore.ignore(record.key)
+                            this.props.stores.bugStore.ignore(record)
                         }
                         }>忽略</a>
                         <a onClick={() => {

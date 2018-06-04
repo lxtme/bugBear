@@ -16,21 +16,21 @@ class Bell extends Component {
         let notice = [];
         let news = [];
         let todo = [];
-        this.props.stores.bellStore.messages.map(x => {
-            if (x.type === 'notice') {
+        this.props.stores.bellStore.messages.map(message => {
+            if (message.type === 'notice') {
                 notice.push(
-                    <li key={x.id} className="bell-item">{x.value}</li>
+                    <li key={message.id} className="bell-item">{message.value}</li>
                 );
-                if (x.type === 'news') {
-                    news.push(
-                        <li className="bell-item" key={x.id}>{x.value}</li>
-                    )
-                }
-                if (x.type === 'todo') {
-                    todo.push(
-                        <li key={x.id} className="bell-item">{x.value}</li>
-                    )
-                }
+            }
+            if (message.type === 'news') {
+                news.push(
+                    <li className="bell-item" key={message.id}>{message.value}</li>
+                )
+            }
+            if (message.type === 'todo') {
+                todo.push(
+                    <li key={message.id} className="bell-item">{message.value}</li>
+                )
             }
             return 0;
         });

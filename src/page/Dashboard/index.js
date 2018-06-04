@@ -5,7 +5,6 @@ import Table from "./Table";
 
 class Dashboard extends Component {
     render() {
-
         return (
             <div className="dashboard-page">
                 <Chart/>
