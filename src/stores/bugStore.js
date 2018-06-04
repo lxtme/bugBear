@@ -8,8 +8,11 @@ class BugStore {
 
     commentKey = '';
 
-    ignore(key) {
-        console.log(key)
+    ignore(record) {
+        console.log(record);
+        const index=this.bugs.indexOf(record);
+        console.log(index);
+        this.bugs.splice(index,1)
     }
 
     comment(key) {

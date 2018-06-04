@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 import {inject, observer} from 'mobx-react';
 import Bell from './Bell';
 
+const SubMenu = Menu.SubMenu;
 const {Header, Sider, Content} = Layout;
 const MenuItem = Menu.Item;
 
@@ -20,7 +21,7 @@ class DefaultLauout extends Component {
                         <div className="default-logo">
                             <h1>BugBear</h1>
                         </div>
-                        <Menu theme="dark" defaultSelectedKeys={['1']}>
+                        <Menu theme="dark" defaultSelectedKeys={['1']} mode='inline'>
                             <MenuItem key='1'>
                                 <Link to='./dashboard'>
                                     <Icon type='dashboard'/>
@@ -51,10 +52,26 @@ class DefaultLauout extends Component {
                                 <Icon type='warning'/>
                                 <span>日历</span>
                             </MenuItem>
-                            <MenuItem key='8'>
-                                <Icon type='warning'/>
-                                <span>团队</span>
-                            </MenuItem>
+                            <SubMenu key="sub1" title={<span><Icon type="warning"/><span>设置</span></span>}>
+                                <MenuItem key='8'>
+                                    <Link to='./profile'>
+                                        <Icon type='user'/>
+                                        <span>个人</span>
+                                    </Link>
+                                </MenuItem>
+                                <MenuItem key='9'>
+                                    <Link to='/team'>
+                                        <Icon type='warning'/>
+                                        <span>团队</span>
+                                    </Link>
+                                </MenuItem>
+                                <MenuItem key='10'>
+                                    <Link to='/project'>
+                                        <Icon type='warning'/>
+                                        <span>项目</span>
+                                    </Link>
+                                </MenuItem>
+                            </SubMenu>
                         </Menu>
                     </Sider>
                     <Layout>

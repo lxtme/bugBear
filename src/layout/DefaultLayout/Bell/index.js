@@ -21,16 +21,16 @@ class Bell extends Component {
                 notice.push(
                     <li key={x.id} className="bell-item">{x.value}</li>
                 );
-                if (x.type === 'news') {
-                    news.push(
-                        <li className="bell-item" key={x.id}>{x.value}</li>
-                    )
-                }
-                if (x.type === 'todo') {
-                    todo.push(
-                        <li key={x.id} className="bell-item">{x.value}</li>
-                    )
-                }
+            }
+            if (x.type === 'news') {
+                news.push(
+                    <li className="bell-item" key={x.id}>{x.value}</li>
+                )
+            }
+            if (x.type === 'todo') {
+                todo.push(
+                    <li key={x.id} className="bell-item">{x.value}</li>
+                )
             }
             return 0;
         });

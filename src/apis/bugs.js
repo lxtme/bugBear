@@ -12,7 +12,6 @@ export async function listBugs(data) {
                 userNum: 6977,
                 status: '待定',
                 time: '1天前',
-                // operate: '忽略'
             },
             {
                 key: 2,
@@ -21,7 +20,6 @@ export async function listBugs(data) {
                 userNum: 6447,
                 status: '进行中',
                 time: '3小时前',
-                // operate: '忽略'
             },
             {
                 key: 3,
@@ -30,7 +28,6 @@ export async function listBugs(data) {
                 userNum: 9877,
                 status: '已修复',
                 time: '5天前',
-                // operate: '忽略'
             },
         ]
     };
