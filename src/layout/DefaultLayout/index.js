@@ -72,6 +72,22 @@ class DefaultLauout extends Component {
                                     </Link>
                                 </MenuItem>
                             </SubMenu>
+                            <SubMenu key="details" title={<span><Icon type="warning"/><span>错误详情</span></span>}>
+                                <MenuItem key='11'>
+                                    <Link to='./details'>
+                                        <Icon type='user'/>
+                                        <span>错误详情-基本信息</span>
+                                    </Link>
+                                </MenuItem>
+                                <MenuItem key='12'>
+                                    <Icon type='warning'/>
+                                    <span>详情2</span>
+                                </MenuItem>
+                                <MenuItem key='13'>
+                                    <Icon type='warning'/>
+                                    <span>详情3</span>
+                                </MenuItem>
+                            </SubMenu>
                         </Menu>
                     </Sider>
                     <Layout>

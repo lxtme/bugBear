@@ -12,9 +12,10 @@ import DefaultLayout from './layout/DefaultLayout';
 import Profile from "./page/Profile";
 import Team from './page/Profile/Team';
 import Project from './page/Profile/Project';
+import Details from './page/Details';
 
-const bugsnagClient = bugsnag('4968ceaa1c751e37413b1f4b45e7b2b2')
-const ErrorBoundary = bugsnagClient.use(createPlugin(React))
+const bugsnagClient = bugsnag('4968ceaa1c751e37413b1f4b45e7b2b2');
+const ErrorBoundary = bugsnagClient.use(createPlugin(React));
 
 
 @observer
@@ -35,6 +36,7 @@ class App extends Component {
                             <Route path="/team" render={props => <DefaultLayout><Team {...props}/></DefaultLayout>}/>
                             <Route path="/project"
                                    render={props => <DefaultLayout><Project {...props}/></DefaultLayout>}/>
+                            <Route path="/details" render={props=><DefaultLayout><Details {...props}/></DefaultLayout>}/>
                         </div>
                     </Router>
                 </Provider>
