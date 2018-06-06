@@ -64,7 +64,7 @@ class Details extends Component {
                 <Tabs defaultActiveKey="1" onChange={callback}>
                     <TabPane tab="事件列表" key="1">
                         <div className="details-tab1">
-                            <List dataSource={errList} bordered style={{width: 400}} renderItem={item => (
+                            <List dataSource={errList} bordered style={{width: 300}} renderItem={item => (
                                 <List.Item>
                                     <List.Item.Meta title={item.title}
                                                     description="TypeError: null is not an object"/>
