@@ -6,7 +6,8 @@ class Unicode extends Component {
         return (
             <div className="unicode-page">
                 <h1>Unicode</h1>
-                <i className="iconfont icon-smile" style={{fontSize:'800px',lineHeight:'800px',color:"yellow"}}></i>
+                <i className="iconfont icon-smile" style={{fontSize: '800px', lineHeight: '800px', color: "yellow"}}>
+                </i>
             </div>
         )
     }
