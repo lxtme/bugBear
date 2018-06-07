@@ -93,3 +93,69 @@
 .error-message, .error-message-p2 {
   flex: 1;
 }
+
+.details-overview {
+  .flex-row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  .first-box {
+    border: 1px solid #f3f3f3;
+    border-radius: 6px;
+    height: 204px;
+    display: flex;
+    flex-direction: column;
+    line-height: 36px;
+    padding: 10px 20px 0 20px;
+    margin-bottom: 30px;
+    .row1 {
+      .flex-row;
+      justify-content: space-between;
+      .row1-l {
+        color: #9c9c9c;
+      }
+    }
+    .appear-time {
+      font-size: 32px;
+      margin: 10px 0 30px 0;
+    }
+    .appear-number {
+      height: 40px;
+    }
+    .box-bottom {
+      line-height: 40px;
+      border-top: 1px solid #f3f3f3;
+    }
+  }
+  .percent-box {
+    .first-box;
+    .title {
+      .flex-row;
+      justify-content: space-between;
+      .title-l {
+        font-size: 24px;
+      }
+    }
+    .percent-chart {
+      .flex-row;
+      .percent-chart-text ul {
+        list-style: none;
+        .brower {
+          display: inline-block;
+          width: 55px;
+        }
+        span {
+          margin-right: 5px;
+        }
+        .li-before {
+          display: inline-block;
+          width: 8px;
+          height: 8px;
+          border-radius: 8px;
+          background: pink;
+          margin-right: 8px;
+        }
+      }
+    }
+
+  }
+}

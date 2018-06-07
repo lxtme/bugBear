@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Button, Tabs, List, Timeline, Icon} from 'antd';
 import './index.less';
+import Overview from "./Overview";
 
 const TabPane = Tabs.TabPane;
 
@@ -196,7 +197,9 @@ class Details extends Component {
                             </Tabs>
                         </div>
                     </TabPane>
-                    <TabPane tab="概览" key="2">hfhu</TabPane>
+                    <TabPane tab="概览" key="2">
+                        <Overview/>
+                    </TabPane>
                     <TabPane tab="动态" key="3">hfhu</TabPane>
                 </Tabs>
 
