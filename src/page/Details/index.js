@@ -1,12 +1,20 @@
 import React, {Component} from 'react';
-import {Button, Tabs, List, Timeline, Icon} from 'antd';
+import {Button, Tabs, List, Timeline, Icon, Dropdown, Menu} from 'antd';
+import {inject, observer} from 'mobx-react';
 import './index.less';
 import Overview from "./Overview";
+import Dynamic from "./Dynamic";
+import CommentModal from "./CommentModal";
 
 const TabPane = Tabs.TabPane;
+const MenuItem = Menu.Item;
 
 function callback(key) {
     console.log(key);
+}
+
+function handleClick(e) {
+    console.log('click', e)
 }
 
 const errList = [
@@ -27,7 +35,16 @@ const errList = [
         time: '6:00'
     },
 ];
+const transactor = (
+    <Menu onClick={handleClick}>
+        <MenuItem key='jason'>Jason</MenuItem>
+        <MenuItem key='chang'>Chang</MenuItem>
+        <MenuItem key='tian'>Tian</MenuItem>
+    </Menu>
+);
 
+@inject('stores')
+@observer
 class Details extends Component {
     render() {
         return (
@@ -42,9 +59,11 @@ class Details extends Component {
                     </div>
                     <div className="details-top-r">
                         <div>
-                            <Button>评论</Button>
+                            <Button onClick={()=>this.props.stores.detailsStore.showModal()}>评论</Button>
                             <Button>关注</Button>
-                            <Button type="primary">执行人</Button>
+                            <Dropdown overlay={transactor}>
+                                <Button type="primary">执行人</Button>
+                            </Dropdown>
                         </div>
                         <div className="details-top-r-number">
                             <div>
@@ -61,6 +80,7 @@ class Details extends Component {
                             </div>
                         </div>
                     </div>
+                    <CommentModal visible={this.props.stores.detailsStore.visible}/>
                 </div>
                 <Tabs defaultActiveKey="1" onChange={callback}>
                     <TabPane tab="事件列表" key="1">
@@ -184,7 +204,6 @@ class Details extends Component {
                                                 <span className="error-time">11:34:21</span><br/>
                                             </div>
                                         </Timeline.Item>
-
                                     </Timeline>
                                 </TabPane>
                                 <TabPane tab="用户信息" key="6">
@@ -193,14 +212,15 @@ class Details extends Component {
                                 <TabPane tab="元信息" key="7">
 
                                 </TabPane>
-
                             </Tabs>
                         </div>
                     </TabPane>
                     <TabPane tab="概览" key="2">
                         <Overview/>
                     </TabPane>
-                    <TabPane tab="动态" key="3">hfhu</TabPane>
+                    <TabPane tab="动态" key="3">
+                        <Dynamic/>
+                    </TabPane>
                 </Tabs>
 
             </div>

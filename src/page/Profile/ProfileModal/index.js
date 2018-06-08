@@ -1,27 +1,49 @@
 import React, {Component} from 'react';
-import {Modal, Form, Input} from 'antd';
+import {Modal, Form, Input, Upload, Icon} from 'antd';
 import {observer, inject} from 'mobx-react';
 
 const FormItem = Form.Item;
 
+function getBase64(img, callback) {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => callback(reader.result));
+    reader.readAsDataURL(img);
+}
+
 @inject('stores')
 @observer
 class ProfileModal extends Component {
-    handleOk=()=> {
+    state = {
+        loading: false,
+    };
+    handleOk = () => {
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 console.log('values:', values);
                 this.props.stores.profileStore.hiddenModal();
-                const profileData={
-                    email:values.email,
-                    phone:values.phone,
-                    name:values.name,
+                const profileData = {
+                    email: values.email,
+                    phone: values.phone,
+                    name: values.name,
                 };
                 console.log(profileData);
                 this.props.stores.profileStore.profileSet(profileData);
             }
         })
     };
+
+    avatarChange(info) {
+        if (info.file.status === 'uploading') {
+            this.setState.loading = true;
+        }
+        if (info.file.status === 'done') {
+            getBase64(info.file.originFileObj, imageUrl => this.setState({
+                imageUrl,
+                loading: false,
+            }));
+        }
+    };
+
     render() {
         const {getFieldDecorator} = this.props.form;
         const formItemLayout = {
@@ -32,12 +54,18 @@ class ProfileModal extends Component {
                 span: 16
             }
         };
-
+        const uploadButton = (
+            <div>
+                <Icon type={this.state.loading ? 'loading' : 'plus'}/>
+                <div>Upload</div>
+            </div>
+        );
+        const imageUrl = this.state.imageUrl;
         return (
             <div>
                 <Modal visible={this.props.visible} title="编辑个人信息"
                        onCancel={() => this.props.stores.profileStore.hiddenModal()}
-                       onOk={() =>this.handleOk()}>
+                       onOk={() => this.handleOk()}>
                     <Form>
                         <FormItem {...formItemLayout} label="昵称">
                             {getFieldDecorator('name', {
@@ -67,6 +95,13 @@ class ProfileModal extends Component {
                             })(
                                 <Input placeholder="13200001111"/>
                             )}
+                        </FormItem>
+                        <FormItem {...formItemLayout} label="头像">
+                            <Upload name="avatar" list-type="picture-card"
+                                    action="//jsonplaceholder.typicode.com/posts/"
+                                    onchange={this.avatarChange}>
+                                {imageUrl ? <img src={imageUrl} alt="avatar"/> : uploadButton}
+                            </Upload>
                         </FormItem>
                     </Form>
                 </Modal>

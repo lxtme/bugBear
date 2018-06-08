@@ -4,6 +4,7 @@ import BugStore from './bugStore';
 import DefaultStore from "./defaultStore";
 import BellStore from "./bellStore";
 import ProfileStore from "./ProfileStore";
+import DetailsStore from "./DetailsStore";
 
 class stores{
     constructor(){
@@ -13,6 +14,7 @@ class stores{
         this.defaultStore=new DefaultStore();
         this.bellStore=new BellStore();
         this.profileStore=new ProfileStore();
+        this.detailsStore=new DetailsStore()
     }
 
 }

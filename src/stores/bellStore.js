@@ -3,6 +3,7 @@ import {observable} from 'mobx';
 class BellStore {
     @observable display = 'none';
     @observable clearKey = '';
+    @observable bellBackground='';
     @observable messages = [
         {
             id: 1,
@@ -41,6 +42,12 @@ class BellStore {
     handleClear() {
         let id = this.messages.map(x => x.id);
         console.log(id)
+    }
+    handleMouseOver(){
+        this.bellBackground='rgb(230, 247, 254)';
+    }
+    handleMouseOut(){
+        this.bellBackground='';
     }
 }
 
