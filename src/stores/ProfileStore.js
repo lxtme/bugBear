@@ -17,6 +17,7 @@ class ProfileStore {
     }
 
     @observable visible = false;
+    @observable visibleAdd = false;
     @observable teamMember = [];
 
     showModal() {
@@ -25,6 +26,14 @@ class ProfileStore {
 
     hiddenModal() {
         this.visible = false
+    };
+
+    showModalAdd() {
+        this.visibleAdd = true
+    };
+
+    hiddenModalAdd() {
+        this.visibleAdd = false
     };
 
     deleteMember(record) {

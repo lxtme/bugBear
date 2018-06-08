@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Avatar, Alert, Table} from 'antd';
 import {observer, inject} from 'mobx-react';
 import TeamModal from './TeamModal';
+import TeamAddModal from "./TeamAddModal";
 
 @inject('stores')
 @observer
@@ -54,12 +55,13 @@ class Team extends Component {
                 </div>
                 <div style={{marginTop: 50}}>
                     <span className="profile-title">团队成员</span>
-                    <span className="profile-btn"><a>编辑</a></span>
+                    <span className="profile-btn"><a onClick={()=>this.props.stores.profileStore.showModalAdd()}>添加</a></span>
                     <Alert type="info" message="共13人" showIcon style={{width: 1200}}/>
                     <Table dataSource={this.props.stores.profileStore.teamMember.slice()} columns={teamColumns}
                            style={{width: 1200}}/>
                 </div>
                 <TeamModal visible={this.props.stores.profileStore.visible}/>
+                <TeamAddModal visible={this.props.stores.profileStore.visibleAdd}/>
             </div>
         )
     }
