@@ -3,6 +3,7 @@ import {Modal, Form, Input} from 'antd';
 import {inject, observer} from 'mobx-react';
 
 const FormItem = Form.Item;
+const {TextArea} = Input;
 
 @inject('stores')
 @observer
@@ -21,7 +22,7 @@ class CommentModal extends Component {
         return (
             <div>
                 <Modal visible={this.props.visible} title='评论' onOk={() => this.handleOk()}
-                       onCancel={()=>this.props.stores.detailsStore.hiddenModal()}>
+                       onCancel={() => this.props.stores.detailsStore.hiddenModal()}>
                     <Form>
                         <FormItem>
                             {getFieldDecorator('comment', {
@@ -29,7 +30,7 @@ class CommentModal extends Component {
                                     required: true, message: '请输入评论'
                                 }]
                             })(
-                                <textarea style={{width:'100%',height:90}}/>
+                                <TextArea rows={4}/>
                             )}
                         </FormItem>
                     </Form>
