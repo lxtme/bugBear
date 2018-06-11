@@ -78,14 +78,14 @@ class HomePage extends Component {
                             <img src={img2} alt="img"/>
                             <p>BugBear实时为您更新错误状态</p>
                         </div>
-                        <div className="feature-2">
+                        <div className="feature-1">
                             <h4>
                                 实时
                             </h4>
                             <img src={img2} alt="img"/>
                             <p>BugBear实时为您更新错误状态</p>
                         </div>
-                        <div className="feature-3">
+                        <div className="feature-1">
                             <h4>
                                 实时
                             </h4>
