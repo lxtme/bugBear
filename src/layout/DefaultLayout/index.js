@@ -4,16 +4,25 @@ import './index.less';
 import {Link} from 'react-router-dom';
 import {inject, observer} from 'mobx-react';
 import Bell from './Bell';
+import {withRouter} from 'react-router-dom';
 
 const SubMenu = Menu.SubMenu;
 const {Header, Sider, Content} = Layout;
 const MenuItem = Menu.Item;
-function handleClick(e) {
-    console.log('click',e)
-}
+
 @inject('stores')
 @observer
 class DefaultLauout extends Component {
+    handleClick(e) {
+        console.log('click', e);
+        this.props.history.push(e.key);
+        this.props.stores.defaultStore.updateSelectedKeys(e.key)
+    }
+
+    handleClickSubMenu(openKeys) {
+        this.props.stores.defaultStore.updateOpenKeys(openKeys)
+    }
+
     render() {
         return (
             <div>
@@ -23,63 +32,33 @@ class DefaultLauout extends Component {
                         <div className="default-logo">
                             <h1>BugBear</h1>
                         </div>
-                        <Menu onClick={handleClick} theme="dark" defaultSelectedKeys={['1']} mode='inline'>
-                            <MenuItem key='1'>
-                                <Link to='./dashboard'>
-                                    <Icon type='dashboard'/>
-                                    <span>控制台</span>
-                                </Link>
-                            </MenuItem>
-                            <MenuItem key='2'>
-                                <Icon type='form'/>
-                                <span>最近</span>
-                            </MenuItem>
-                            <MenuItem key='3'>
-                                <Icon type='table'/>
-                                <span>所有</span>
-                            </MenuItem>
-                            <MenuItem key='4'>
-                                <Icon type='profile'/>
-                                <span>网址</span>
-                            </MenuItem>
-                            <MenuItem key='5'>
-                                <Icon type='check-circle-o'/>
-                                <span>浏览器</span>
-                            </MenuItem>
-                            <MenuItem key='6'>
-                                <Icon type='warning'/>
-                                <span>用户</span>
-                            </MenuItem>
-                            <MenuItem key='7'>
-                                <Icon type='warning'/>
-                                <span>日历</span>
+                        <Menu theme="dark" onClick={(e) => this.handleClick(e)}
+                              selectedKeys={this.props.stores.defaultStore.selectedKeys.slice()}
+                              onOpenChange={(openKeys) => this.handleClickSubMenu(openKeys)}
+                              openKeys={this.props.stores.defaultStore.openKeys.slice()}
+                              mode='inline'>
+                            <MenuItem key='/dashboard'>
+                                <Icon type='dashboard'/>
+                                <span>控制台</span>
                             </MenuItem>
                             <SubMenu key="setting" title={<span><Icon type="warning"/><span>设置</span></span>}>
-                                <MenuItem key='8'>
-                                    <Link to='./profile'>
-                                        <Icon type='user'/>
-                                        <span>个人</span>
-                                    </Link>
+                                <MenuItem key='/profile'>
+                                    <Icon type='user'/>
+                                    <span>个人</span>
                                 </MenuItem>
-                                <MenuItem key='9'>
-                                    <Link to='/team'>
-                                        <Icon type='warning'/>
-                                        <span>团队</span>
-                                    </Link>
+                                <MenuItem key='/team'>
+                                    <Icon type='warning'/>
+                                    <span>团队</span>
                                 </MenuItem>
-                                <MenuItem key='10'>
-                                    <Link to='/project'>
-                                        <Icon type='warning'/>
-                                        <span>项目</span>
-                                    </Link>
+                                <MenuItem key='/project'>
+                                    <Icon type='warning'/>
+                                    <span>项目</span>
                                 </MenuItem>
                             </SubMenu>
                             <SubMenu key="details" title={<span><Icon type="warning"/><span>错误详情</span></span>}>
-                                <MenuItem key='11'>
-                                    <Link to='./details'>
-                                        <Icon type='user'/>
-                                        <span>错误详情-基本信息</span>
-                                    </Link>
+                                <MenuItem key='/details'>
+                                    <Icon type='user'/>
+                                    <span>错误详情-基本信息</span>
                                 </MenuItem>
                                 <MenuItem key='12'>
                                     <Icon type='warning'/>
@@ -122,4 +101,4 @@ class DefaultLauout extends Component {
     }
 }
 
-export default DefaultLauout;
+export default withRouter(DefaultLauout);
