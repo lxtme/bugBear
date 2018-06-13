@@ -5,7 +5,6 @@ import './index.less';
 import {withRouter} from 'react-router-dom';
 import {inject, observer} from 'mobx-react';
 
-
 @inject('stores')
 @observer
 class Blog extends Component {
