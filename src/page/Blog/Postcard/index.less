@@ -1,0 +1,73 @@
+html {
+  font-size: 16px;
+}
+
+.postcard-wrap {
+  border: 1px solid #e7e7ea;
+  border-radius: 4px;
+  height: 0;
+  padding-bottom: 150%;
+  position: relative;
+}
+
+.postcard-card {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.img {
+  height: 48%;
+  background-image: url("./36F67090-6EF3-4FDA-A039-30F3B5755346.png");
+  background-size: auto 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: white;
+  border-top-left-radius: 4px;
+  border-top-right-radius:4px;
+}
+
+.container {
+  letter-spacing: .12rem;
+  height: 52%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.3rem;
+  }
+  .details {
+    .title {
+      font-size: 1.3rem;
+      margin-bottom: .4rem;
+      color: black;
+    }
+    .time {
+      display: inline-block;
+      color: #a8acc2;
+      margin-bottom: .6rem;
+    }
+    .content {
+      font-size: 1.1rem;
+      line-height: 1.5rem;
+      color: #5b6071;
+      overflow: hidden;
+      height: 3rem;
+      //text-overflow: ellipsis;
+      //display: -webkit-box;
+      //-webkit-line-clamp: 3;
+      //-webkit-box-orient: vertical;
+    }
+  }
+  .attribution {
+    line-height: 2.6rem;
+    @media (max-width: 576px) {
+      .attribution {
+        line-height: 1.5rem;
+      }
+    }
+    .attribution-name {
+      display: inline-block;
+      font-size: 1.1rem;
+      margin-left: 1rem;
+    }
+  }

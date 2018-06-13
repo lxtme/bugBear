@@ -3,50 +3,13 @@ import {Button} from 'antd';
 import './index.less';
 import img1 from './542B779B-3C9A-49EF-9766-5C410555999C.png';
 import img2 from './7493FCC1-4E35-4DB9-A349-AB6450A3722E.png';
+import CommonNav from "./CommonNav";
 
 class HomePage extends Component {
     render() {
         return (
             <div className="homepage">
-                <div className="header">
-                    <div className="agree">
-                        <p>IN ORDER TO GIVE YOU BETTER SERVICE WE USE COOKIES. BY CONTINUING TO USE OUR WEBSITE, YOU
-                            AGREE TO THE USE OF COOKIES AS DESCRIBED IN OUR COOKIE POLICY </p>
-                        <Button className="agree-btn">I agree</Button>
-                    </div>
-                    <div className="nav1-box">
-                        <div className="nav1">
-                            <div className="nav1-l">
-                                <ul>
-                                    <li>ENTERPRISE</li>
-                                    <li>KONG API GATEWAYs</li>
-                                </ul>
-                            </div>
-                            <div className="nav1-r">
-                                <ul>
-                                    <li>SUPPORT</li>
-                                    <li>REQUEST DEMO</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="nav2-box">
-                        <div className='nav2'>
-                            <div className="nav2-l">
-                                BugBear
-                            </div>
-                            <ul>
-                                <li>关于</li>
-                                <li>DOCS</li>
-                                <li>PLUGINS</li>
-                                <li>COMMUNITY</li>
-                                <li>ENTERPRISE</li>
-                                <li>GITHUB</li>
-                                <Button>INSTALLATION</Button>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                <CommonNav/>
                 <div className="container">
                     <div className="start-box">
                         <div className="start">

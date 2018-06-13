@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Layout, Menu, Icon, Avatar} from 'antd';
 import './index.less';
-import {Link} from 'react-router-dom';
 import {inject, observer} from 'mobx-react';
 import Bell from './Bell';
 import {withRouter} from 'react-router-dom';
