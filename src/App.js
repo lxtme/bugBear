@@ -17,6 +17,7 @@ import Unicode from './page/Unicode';
 import HomePage from './page/HomePage';
 import Blog from './page/Blog';
 import BlogDetails from "./page/Blog/BlogDetails";
+import ProjectDetails from "./page/Profile/Project/ProjectDetails";
 
 const bugsnagClient = bugsnag('4968ceaa1c751e37413b1f4b45e7b2b2');
 const ErrorBoundary = bugsnagClient.use(createPlugin(React));
@@ -40,11 +41,14 @@ class App extends Component {
                             <Route path="/team" render={props => <DefaultLayout><Team {...props}/></DefaultLayout>}/>
                             <Route path="/project"
                                    render={props => <DefaultLayout><Project {...props}/></DefaultLayout>}/>
-                            <Route path="/details" render={props=><DefaultLayout><Details {...props}/></DefaultLayout>}/>
+                            <Route path="/details"
+                                   render={props => <DefaultLayout><Details {...props}/></DefaultLayout>}/>
                             <Route path="/unicode" component={Unicode}/>
                             <Route path="/homepage" component={HomePage}/>
                             <Route path="/blog" component={Blog}/>
                             <Route path="/blogdetails" component={BlogDetails}/>
+                            <Route path="/projectdetails"
+                                   render={props => <DefaultLayout><ProjectDetails {...props}/></DefaultLayout>}/>
                         </div>
                     </Router>
                 </Provider>
