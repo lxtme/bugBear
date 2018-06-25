@@ -4,30 +4,41 @@ import {message} from 'antd';
 
 class UserStore {
     @observable token = '';
+    @observable visibleForget = false;
+    hiddenForget(){
+        this.visibleForget = false
+    }
+    showForget(){
+        this.visibleForget = true
+    }
 
     async login(data) {
         const result = await login(data);
-        if (result.status === 'success') {
+        if (result.status === 200) {
             message.success(' 登录成功');
-            this.token = result.token;
+            this.token = result.data.token;
             console.log('token:', this.token);
 
-            return;
+            return true;
         }
-        message.error('登录失败')
+        message.error('登录失败');
+        return false;
     }
 
     async register(data) {
         const result = await register(data);
-        if (result.status === 'success') {
+        if (result.status === 200) {
             message.success('注册成功');
-            this.token = result.token;
-            console.log('register token:', this.token);
+            // this.token = result.token;
+            // console.log('register token:', this.token);
 
-            return;
+            return true;
         }
-        message.error('注册失败')
+        message.error('注册失败');
+        return false;
     }
 }
+
+
 
 export default UserStore;

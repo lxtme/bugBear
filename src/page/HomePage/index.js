@@ -15,16 +15,13 @@ class HomePage extends Component {
                         <div className="start">
                             <div className="start-l">
                                 <p className="p1">
-                                    BugBear is a supervision center of bugs.BugBear is a supervision
-                                    center of bugs
+                                    ThinBug
                                 </p>
                                 <p className="p2">
-                                    BugBear 可以实时监控你的项目，给你最专业的提醒,最便捷的服务。
-                                    BugBear 可以实时监控你的项目，给你最专业的提醒,最便捷的服务。
-                                    BugBear 可以实时监控你的项目，给你最专业的提醒,最便捷的服务。
+                                    一个服务于开发人员的工具，支持多种语言，实时监控错误，提供错误报告，重现错误场景，帮助开发者给予用户更好的体验。
                                 </p>
                                 <div>
-                                    <Button className="start-btn">start</Button>
+                                    <Button className="start-btn">开始使用</Button>
                                     <Button className="why-btn">why</Button>
                                 </div>
                             </div>
@@ -33,27 +30,29 @@ class HomePage extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className="feature">
-                        <div className="feature-1">
-                            <h4>
-                                实时
-                            </h4>
-                            <img src={img2} alt="img"/>
-                            <p>BugBear实时为您更新错误状态</p>
-                        </div>
-                        <div className="feature-1">
-                            <h4>
-                                实时
-                            </h4>
-                            <img src={img2} alt="img"/>
-                            <p>BugBear实时为您更新错误状态</p>
-                        </div>
-                        <div className="feature-1">
-                            <h4>
-                                实时
-                            </h4>
-                            <img src={img2} alt="img"/>
-                            <p>BugBear实时为您更新错误状态</p>
+                    <div className="feature-box">
+                        <div className="feature">
+                            <div className="feature-1">
+                                <h4>
+                                    实时
+                                </h4>
+                                <img src={img2} alt="img"/>
+                                <p>ThinBug实时为您更新错误状态</p>
+                            </div>
+                            <div className="feature-1">
+                                <h4>
+                                    实时
+                                </h4>
+                                <img src={img2} alt="img"/>
+                                <p>ThinBug实时为您更新错误状态</p>
+                            </div>
+                            <div className="feature-1">
+                                <h4>
+                                    实时
+                                </h4>
+                                <img src={img2} alt="img"/>
+                                <p>ThinBug实时为您更新错误状态</p>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Form, Button, Input, Select, Table as TableAntd, Alert, message} from 'antd';
+import {Form, Button, Input, Select, Table as TableAntd, message} from 'antd';
 import {inject, observer} from 'mobx-react';
 import CommentModal from "./Modal";
 
@@ -84,7 +84,7 @@ class Table extends Component {
                             message.success('该错误将不在展示，可以通过筛选状态已忽略查看');
                             this.props.stores.bugStore.ignore(record)
                         }
-                        }>忽略</a>
+                        }>忽略</a>&nbsp;&nbsp;
                         <a onClick={() => {
                             this.props.stores.bugStore.comment(record.key)
                         }}>评论</a>
@@ -96,7 +96,7 @@ class Table extends Component {
         return (
             <div className="table-box">
                 <CommentModal visible={this.props.stores.bugStore.visible}/>
-                <Form layout="inline">
+                <Form layout="inline" style={{marginBottom:20}}>
                     <FormItem label="关键词">
                         <Input placeholder="请输入" style={{width: 220}}/>
                     </FormItem>
@@ -114,7 +114,6 @@ class Table extends Component {
                         <Button>重置</Button>
                     </FormItem>
                 </Form>
-                <Alert style={{margin: '20px 0'}} message="Informational Notes" type="info" showIcon/>
                 <TableAntd rowSelection={rowSelection} columns={columns}
                            dataSource={this.props.stores.bugStore.bugs.slice()}/>
             </div>

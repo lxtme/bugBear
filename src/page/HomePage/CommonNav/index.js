@@ -1,6 +1,6 @@
 import React, {Component} from "react";
-import {Button} from 'antd';
 import './index.less';
+import {withRouter} from 'react-router-dom';
 
 class CommonNav extends Component {
     render() {
@@ -8,40 +8,39 @@ class CommonNav extends Component {
             <div className={this.props.className}>
                 <div className="header-box">
                     <div className="header">
-                        <div className="agree">
-                            <p>IN ORDER TO GIVE YOU BETTER SERVICE WE USE COOKIES. BY CONTINUING TO USE OUR WEBSITE, YOU
-                                AGREE TO THE USE OF COOKIES AS DESCRIBED IN OUR COOKIE POLICY </p>
-                            <Button className="agree-btn">I agree</Button>
-                        </div>
-                        <div className="nav1-box">
-                            <div className="nav1">
-                                <div className="nav1-l">
-                                    <ul>
-                                        <li>ENTERPRISE</li>
-                                        <li>KONG API GATEWAYs</li>
-                                    </ul>
-                                </div>
-                                <div className="nav1-r">
-                                    <ul>
-                                        <li>SUPPORT</li>
-                                        <li>REQUEST DEMO</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                        {/*<div className="agree">*/}
+                        {/*<p>IN ORDER TO GIVE YOU BETTER SERVICE WE USE COOKIES. BY CONTINUING TO USE OUR WEBSITE, YOU*/}
+                        {/*AGREE TO THE USE OF COOKIES AS DESCRIBED IN OUR COOKIE POLICY </p>*/}
+                        {/*<Button className="agree-btn">I agree</Button>*/}
+                        {/*</div>*/}
+                        {/*<div className="nav1-box">*/}
+                        {/*<div className="nav1">*/}
+                        {/*<div className="nav1-l">*/}
+                        {/*<ul>*/}
+                        {/*<li>ENTERPRISE</li>*/}
+                        {/*<li>KONG API GATEWAYs</li>*/}
+                        {/*</ul>*/}
+                        {/*</div>*/}
+                        {/*<div className="nav1-r">*/}
+                        {/*<ul>*/}
+                        {/*<li>SUPPORT</li>*/}
+                        {/*<li>REQUEST DEMO</li>*/}
+                        {/*</ul>*/}
+                        {/*</div>*/}
+                        {/*</div>*/}
+                        {/*</div>*/}
                         <div className="nav2-box">
                             <div className='nav2'>
                                 <div className="nav2-l">
-                                    BugBear
+                                    ThinBug
                                 </div>
                                 <ul>
-                                    <li>关于</li>
-                                    <li>DOCS</li>
-                                    <li>PLUGINS</li>
-                                    <li>COMMUNITY</li>
-                                    <li>ENTERPRISE</li>
-                                    <li>GITHUB</li>
-                                    <Button>INSTALLATION</Button>
+                                    <li onClick={() => this.props.history.push('/homepage')}>首页</li>
+                                    <li onClick={() => this.props.history.push('/homepage')}>产品</li>
+                                    <li onClick={() => this.props.history.push('/homepage')}>文档</li>
+                                    <li onClick={() => this.props.history.push('/blog')}>博客</li>
+                                    <li onClick={() => this.props.history.push('/homepage')}>关于</li>
+                                    <li onClick={() => this.props.history.push('/dashboard')}>控制台</li>
                                 </ul>
                             </div>
                         </div>
@@ -54,4 +53,4 @@ class CommonNav extends Component {
     }
 }
 
-export default CommonNav;
+export default withRouter(CommonNav);

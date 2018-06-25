@@ -2,12 +2,17 @@ import React, {Component} from 'react';
 import './index.less';
 import {Form, Input, Button} from 'antd';
 import {observer, inject} from 'mobx-react';
+import {withRouter} from 'react-router-dom';
 
 const FormItem = Form.Item;
 
 @inject('stores')
 @observer
 class Register extends Component {
+    state = {
+        confirmDirty: false,
+    };
+
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
@@ -15,11 +20,34 @@ class Register extends Component {
                 console.log('values:', values);
                 const data = {
                     email: values.email,
-                    password: values.email
+                    password: values.password,
                 };
-                this.props.stores.userStore.register(data);
+                let result = this.props.stores.userStore.register(data);
+                if (result) {
+                    this.props.history.push('/login')
+                }
             }
         })
+    };
+
+    handleConfirmBlur = (e) => {
+        const value = e.target.value;
+        this.setState({confirmDirty: this.state.confirmDirty || !!value})
+    };
+
+    compareToFirstPassword = (rule, value, callback) => {
+        const form = this.props.form;
+        if (value && value !== form.getFieldValue('password')) {
+            callback('上下密码不一致');
+        }
+        callback();
+    };
+    validateToNextPassword = (rule, value, callback) => {
+        const form = this.props.form;
+        if (value && this.state.confirmDirty) {
+            form.validateFields(['confirm'], {force: true})
+        }
+        callback();
     };
 
     render() {
@@ -41,19 +69,26 @@ class Register extends Component {
                             </FormItem>
                             <FormItem>
                                 {getFieldDecorator('password', {
-                                    rules: [{required: true, message: '请输入密码'}]
+                                    rules: [{required: true, message: '请输入密码'}, {
+                                        max: 16,
+                                        message: '密码长度为6-16位'
+                                    }, {min: 6, message: '密码长度为6-16位'}, {
+                                        validator: this.validateToNextPassword,
+                                }]
                                 })(<Input type="password" placeholder="6 - 16位密码，区分大小写"/>)}
                             </FormItem>
                             <FormItem>
                                 {getFieldDecorator('confirm', {
-                                    rules: [{required: true, message: '请确认您的密码'}]
-                                })(<Input type="password" placeholder="确认密码"/>
+                                    rules: [{required: true, message: '请确认您的密码'}, {
+                                        validator: this.compareToFirstPassword,
+                                    }]
+                                })(<Input type="password" placeholder="确认密码" onBlur={this.handleConfirmBlur}/>
                                 )}
                             </FormItem>
                             <FormItem>
                                 <div className="register-register">
                                     <Button type="primary" htmlType="submit" className="register-btn">注册</Button>
-                                    <a href="">使用已有账号登录</a>
+                                    <a href="" onClick={() => this.props.history.push('/login')}>使用已有账号登录</a>
                                 </div>
                             </FormItem>
                         </Form>
@@ -64,4 +99,4 @@ class Register extends Component {
     }
 }
 
-export default Form.create()(Register);
+export default withRouter(Form.create()(Register));

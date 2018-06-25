@@ -4,10 +4,6 @@ class DefaultStore {
 
     @observable selectedKeys = ['/dashboard'];
     @observable openKeys = [];
-    @observable collapsed = false;
-    toggle = () => {
-        this.collapsed = !this.collapsed
-    };
 
     updateSelectedKeys(key) {
         this.selectedKeys = [key]

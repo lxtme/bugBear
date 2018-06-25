@@ -41,31 +41,27 @@ class TeamModal extends Component {
                     <Form>
                         <FormItem {...formItemLayout} label="昵称">
                             {getFieldDecorator('name', {
+                                initialValue:this.props.stores.profileStore.teamInformation.name,
                                 rules: [{
                                     required: true, message: '昵称不能为空'
                                 }]
                             })(
-                                <Input placeholder="jason"/>
+                                <Input/>
                             )}
+                        </FormItem>
+                        <FormItem {...formItemLayout} label="创建时间">
+                                <Input readonly='readonly' value={this.props.stores.profileStore.teamInformation.time}/>
                         </FormItem>
                         <FormItem {...formItemLayout} label="邮箱">
                             {getFieldDecorator('email', {
+                                initialValue:this.props.stores.profileStore.teamInformation.email,
                                 rules: [{
                                     type: 'email', message: '请输入有效的邮箱地址'
                                 }, {
                                     required: true, message: '邮箱不能为空'
                                 }]
                             })(
-                                <Input placeholder="bugbear@gmail.com"/>
-                            )}
-                        </FormItem>
-                        <FormItem {...formItemLayout} label="手机号">
-                            {getFieldDecorator('phone', {
-                                rules: [{
-                                    required: true, message: '请输入手机号'
-                                }]
-                            })(
-                                <Input placeholder="13200001111"/>
+                                <Input/>
                             )}
                         </FormItem>
                     </Form>

@@ -19,23 +19,29 @@
         margin: 0 auto;
         justify-content: space-between;
         .start-l {
-          margin: auto 0;
+          margin: auto 10px;
           width: 48%;
           p {
             margin-bottom: 0;
           }
           .p1 {
-            font-size: 26px;
+            color: white;
+            font-size: 56px;
             border-bottom: 1px solid #d2d2d2;
             margin-bottom: 10px;
             padding-bottom: 10px;
           }
           .p2 {
-            color: rgba(255, 255, 255, 0.5);
+            font-size: 18px;
+            color: #f3f3f3;
             line-height: 32px;
           }
+          button{
+            margin: 30px 15px 0 0;
+            height: 38px;
+            font-size: 16px;
+          }
           .start-btn {
-            margin: 30px 10px 0 0;
             background: #36ac60;
             border-color: #36ac60;
             color: white;
@@ -43,14 +49,30 @@
         }
         .start-r {
           width: 48%;
+          img{
+            width:100%;
+          }
+        }
+        @media (max-width: 768px){
+          display: flex;
+          flex-direction: column;
+          .start-l{
+            width:80%;
+            margin:0 auto;
+          }
+          .start-r{
+            width:80%;
+            margin:0 auto;
+          }
         }
       }
     }
+
     .feature {
       .max-1020;
+      margin: 0 auto;
       .flex-row;
       justify-content: space-between;
-      margin: 0 auto;
       padding: 50px 0 20px 0;
       .feature-1 {
         width: 30%;
