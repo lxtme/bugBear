@@ -13,20 +13,22 @@ const Search = Input.Search;
 @inject('stores')
 @observer
 class Project extends Component {
-    editClick = (index) => {
+    editClick = (item) => {
         console.log('ddd');
         this.props.stores.projectDetailsStore.showModalEdit();
-        console.log(index);
+        console.log(item);
+        this.props.stores.projectDetailsStore.updateCurrentData(item);
     };
-    moreClick = (index) => {
+    moreClick = (item) => {
         console.log('ddd');
         this.props.stores.projectDetailsStore.showModalMore();
-        console.log(index);
+        console.log(item);
+        this.props.stores.projectDetailsStore.updateCurrentData(item)
     };
-    addClick = (index) => {
+    addClick = (record) => {
         console.log('ddd');
         this.props.stores.projectDetailsStore.showModalAdd();
-        console.log(index);
+        console.log(record);
     };
 
     render() {
@@ -41,8 +43,8 @@ class Project extends Component {
                     <List dataSource={this.props.stores.projectDetailsStore.projectData}
                           renderItem={item => (
                               <List.Item actions={[<a
-                                  onClick={this.editClick}>编辑</a>,
-                                  <a onClick={this.moreClick}>更多&nbsp;&nbsp;&nbsp;&nbsp;<Icon type="down"/></a>]}>
+                                  onClick={()=>this.editClick(item)}>编辑</a>,
+                                  <a onClick={()=>this.moreClick(item)}>更多&nbsp;&nbsp;&nbsp;&nbsp;<Icon type="down"/></a>]}>
                                   <List.Item.Meta avatar={<Avatar>J</Avatar>}
                                                   title={item.title}
                                                   description={item.describe}/>

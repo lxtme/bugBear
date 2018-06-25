@@ -12,6 +12,39 @@ const MenuItem = Menu.Item;
 @inject('stores')
 @observer
 class DefaultLauout extends Component {
+    state = {
+        size: '32px',
+        collapsed: false,
+
+    };
+    toggle = () => {
+        // if(this.state.collapsed===false){
+        //     this.setState({
+        //         size:'16px'
+        //     })
+        // }
+        // else{
+        //     this.setState({
+        //         size:'32px'
+        //     })
+        // }
+        // this.state.size === '32px'?'16px':'32px'
+        // if(this.state.size==='32px'){
+        //     return '16px'
+        // }else {
+        //     return "32px"
+        // }
+
+        this.setState({
+            size: this.state.size === '32px'?'16px':'32px'
+        });
+        this.setState({
+                collapsed : !this.state.collapsed
+            }
+        );
+    };
+
+
     handleClick(e) {
         console.log('click', e);
         this.props.history.push(e.key);
@@ -27,9 +60,9 @@ class DefaultLauout extends Component {
             <div>
                 <Layout>
                     <Sider className="default-sider" collapsible trigger={null}
-                           collapsed={this.props.stores.defaultStore.collapsed}>
-                        <div className="default-logo">
-                            <h1>BugBear</h1>
+                        collapsed={this.state.collapsed}>
+                        <div className="default-logo" onClick={() => this.props.history.push('/homepage')}>
+                            <h1 style={{fontSize: this.state.size}}>ThinBug</h1>
                         </div>
                         <Menu theme="dark" onClick={(e) => this.handleClick(e)}
                               selectedKeys={this.props.stores.defaultStore.selectedKeys.slice()}
@@ -76,9 +109,11 @@ class DefaultLauout extends Component {
                     </Sider>
                     <Layout>
                         <Header className="default-header">
-                            <Icon type={this.props.stores.defaultStore.collapsed ? 'menu-unfold' : 'menu-fold'}
-                                  onClick={this.props.stores.defaultStore.toggle}/>
+                            <Icon
+                                type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
+                                onClick={this.toggle}/>
                             <div className="default-header-r">
+
                                 <div className="default-bell-box"
                                      onMouseOver={() => this.props.stores.bellStore.handleMouseOver()}
                                      onMouseOut={() => this.props.stores.bellStore.handleMouseOut()}>

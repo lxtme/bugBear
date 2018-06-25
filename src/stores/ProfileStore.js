@@ -19,6 +19,18 @@ class ProfileStore {
     @observable visible = false;
     @observable visibleAdd = false;
     @observable teamMember = [];
+    @observable  profileData = {
+        avatar: 'T',
+        email: 'thinbug@gmail.com',
+        name: 'thinbug',
+        phone: '13233332222'
+    };
+    @observable teamInformation={
+        avatar:'T',
+        name:'team',
+        email:'team@gmail.com',
+        time:'2018.6.1',
+    };
 
     showModal() {
         this.visible = true

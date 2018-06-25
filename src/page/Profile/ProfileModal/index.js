@@ -69,31 +69,36 @@ class ProfileModal extends Component {
                     <Form>
                         <FormItem {...formItemLayout} label="昵称">
                             {getFieldDecorator('name', {
+                                initialValue:this.props.stores.profileStore.profileData.name,
                                 rules: [{
                                     required: true, message: '昵称不能为空'
                                 }]
                             })(
-                                <Input placeholder="jason"/>
+                                <Input/>
                             )}
                         </FormItem>
                         <FormItem {...formItemLayout} label="邮箱">
                             {getFieldDecorator('email', {
+                                initialValue:this.props.stores.profileStore.profileData.email,
                                 rules: [{
                                     type: 'email', message: '请输入有效的邮箱地址'
                                 }, {
                                     required: true, message: '邮箱不能为空'
                                 }]
                             })(
-                                <Input placeholder="bugbear@gmail.com"/>
+                                <Input/>
                             )}
                         </FormItem>
                         <FormItem {...formItemLayout} label="手机号">
                             {getFieldDecorator('phone', {
+                                initialValue:this.props.stores.profileStore.profileData.phone,
                                 rules: [{
                                     required: true, message: '请输入手机号'
+                                },{
+                                    len:11,message:'请输入正确的手机号码'
                                 }]
                             })(
-                                <Input placeholder="13200001111"/>
+                                <Input/>
                             )}
                         </FormItem>
                         <FormItem {...formItemLayout} label="头像">

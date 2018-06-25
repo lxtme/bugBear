@@ -35,41 +35,34 @@ class EditModal extends Component {
                     <Form className='baseMessage-page'>
                         <FormItem {...formItemLayout} label="头像">
                         </FormItem>
-                        <FormItem {...formItemLayout} label="项目名称">
-                            {getFieldDecorator('name', {
-                                rules: [{
-                                    required: true, message: '名称不能为空'
-                                }]
-                            })(
-                                <Input placeholder="jason"/>
+                        <FormItem {...formItemLayout} label="创建人">
+                                <Input readonly='readonly' value={this.props.stores.projectDetailsStore.currentData.name}/>
+                        </FormItem><FormItem {...formItemLayout} label="项目名称">
+                            {getFieldDecorator('title',
+                                {
+                                    initialValue: this.props.stores.projectDetailsStore.currentData.title,
+                                    rules: [{
+                                        required: true, message: '名称不能为空'
+                                    }]
+                                })(
+                                <Input/>
                             )}
                         </FormItem>
                         <FormItem {...formItemLayout} label="描述">
-                            {getFieldDecorator('direction', {
+                            {getFieldDecorator('describe', {
+                                initialValue:this.props.stores.projectDetailsStore.currentData.describe,
                                 rules: [{
                                     required: true, message: '请简单描述'
                                 }]
                             })(
-                                <Input placeholder="thinbug is good"/>
+                                <Input/>
                             )}
                         </FormItem>
                         <FormItem {...formItemLayout} label="语言">
-                            {getFieldDecorator('language', {
-                                rules: [{
-                                    required: true, message: '语言'
-                                }]
-                            })(
-                                <Input placeholder="chinese"/>
-                            )}
+                                <Input value="js" readonly='readonly'/>
                         </FormItem>
                         <FormItem {...formItemLayout} label="插件版本">
-                            {getFieldDecorator('version', {
-                                rules: [{
-                                    required: true, message: '版本'
-                                }]
-                            })(
-                                <Input placeholder="1.0"/>
-                            )}
+                                <Input value="1.0" readonly='readonly'/>
                         </FormItem>
                     </Form>
                 </Modal>

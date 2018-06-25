@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {Form, Input, Icon, Checkbox, Button} from 'antd';
 import './index.less';
 import {observer, inject} from 'mobx-react';
+import {withRouter} from 'react-router-dom';
+import ForgetModal from "./ForgetModal";
 
 const FormItem = Form.Item;
 
@@ -10,15 +12,19 @@ const FormItem = Form.Item;
 class Login extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.form.validateFields((err, values) => {
+        this.props.form.validateFields(async (err, values) => {
                 if (!err) {
                     console.log(values);
                     const data = {
                         email: values.email,
                         password: values.password
                     };
-                    console.log(this.props.stores);
-                    this.props.stores.userStore.login(data)
+                    console.log('data', data);
+                    let result = await this.props.stores.userStore.login(data);
+                    console.log('result', result);
+                    if (result) {
+                        this.props.history.push('/dashboard')
+                    }
                 }
             }
         )
@@ -50,7 +56,7 @@ class Login extends Component {
                                     rules: [{required: true, message: ' 请输入密码'}]
                                 })(
                                     <Input prefix={<Icon type="lock" style={{color: 'rgba(0,0,0,.25'}}/>}
-                                           placeholder="密码"/>
+                                           placeholder="密码" type='password'/>
                                 )}
                             </FormItem>
                             <FormItem>
@@ -61,7 +67,7 @@ class Login extends Component {
                                     })(
                                         <Checkbox>自动登录</Checkbox>
                                     )}
-                                    <a href="">忘记密码</a>
+                                    <a onClick={()=>this.props.stores.userStore.showForget()}>忘记密码</a>
                                 </div>
                             </FormItem>
                             <FormItem>
@@ -70,14 +76,15 @@ class Login extends Component {
                                 </Button>
                             </FormItem>
                             <div className="login-register">
-                                <a href="">注册账号</a>
+                                <a href="" onClick={()=>this.props.history.push('/register')}>注册账号</a>
                             </div>
                         </Form>
                     </div>
+                    <ForgetModal visibleForget={this.props.stores.userStore.visibleForget}/>
                 </div>
             </div>
         )
     }
 }
 
-export default Form.create()(Login);
+export default withRouter(Form.create()(Login));

@@ -12,12 +12,16 @@ const formItemLayout = {
         span: 16
     }
 };
-const memberList = [];
-
 
 @inject('stores')
 @observer
 class MoreModal extends Component {
+    constructor() {
+        super()
+        this.state = {
+            memberData: ['aaa', 'sss', 'ddd']
+        };
+    }
 
     handleOk = (e) => {
         e.preventDefault();
@@ -31,9 +35,10 @@ class MoreModal extends Component {
     handleClick = () => {
         const addMember = this.refs.myInput.value;
         console.log(addMember);
-        memberList.push(
-            <li>{addMember}</li>
-        )
+        this.setState({
+            memberData: [...this.state.memberData,addMember]
+        })
+
     };
 
     render() {
@@ -45,12 +50,13 @@ class MoreModal extends Component {
                        onOk={this.handleOk}>
                     <Form className='baseMessage-page '>
                         <FormItem {...formItemLayout} label="项目名称">
-                            {getFieldDecorator('name', {
+                            {getFieldDecorator('title', {
+                                initialValue: this.props.stores.projectDetailsStore.currentData.title,
                                 rules: [{
                                     required: true, message: '名称不能为空'
                                 }]
                             })(
-                                <Input placeholder="thinbug"/>
+                                <Input/>
                             )}
                         </FormItem>
                         <FormItem {...formItemLayout} label="管理员">
@@ -68,8 +74,8 @@ class MoreModal extends Component {
                                     required: true, message: '成员'
                                 }]
                             })(
-                                <ul className='member-list'>{this.props.stores.projectDetailsStore.memberData.map((item, index) => {
-                                  return(<li key={index}>{item}</li>)
+                                <ul className='member-list'>{this.state.memberData.map((item, index) => {
+                                    return (<li key={index}>{item}</li>)
                                 })}</ul>
                             )}
                         </FormItem>

@@ -18,41 +18,37 @@ import HomePage from './page/HomePage';
 import Blog from './page/Blog';
 import BlogDetails from "./page/Blog/BlogDetails";
 import ProjectDetails from "./page/Profile/Project/ProjectDetails";
-
-const bugsnagClient = bugsnag('4968ceaa1c751e37413b1f4b45e7b2b2');
-const ErrorBoundary = bugsnagClient.use(createPlugin(React));
-
+import TestValidation from "./page/TestValidation";
 
 @observer
 class App extends Component {
     render() {
         return (
-            <ErrorBoundary>
-                <Provider stores={stores}>
-                    <Router>
-                        <div className="App">
-                            <Route path="/login" component={Login}/>
-                            <Route path="/register" component={Register}/>
-                            <Route path="/dashboard"
-                                   render={props => <DefaultLayout><Dashboard {...props}/></DefaultLayout>}/>
-                            <Route path="/defaultlayout" component={DefaultLayout}/>
-                            <Route path="/profile"
-                                   render={props => <DefaultLayout><Profile {...props}/></DefaultLayout>}/>
-                            <Route path="/team" render={props => <DefaultLayout><Team {...props}/></DefaultLayout>}/>
-                            <Route path="/project"
-                                   render={props => <DefaultLayout><Project {...props}/></DefaultLayout>}/>
-                            <Route path="/details"
-                                   render={props => <DefaultLayout><Details {...props}/></DefaultLayout>}/>
-                            <Route path="/unicode" component={Unicode}/>
-                            <Route path="/homepage" component={HomePage}/>
-                            <Route path="/blog" component={Blog}/>
-                            <Route path="/blogdetails" component={BlogDetails}/>
-                            <Route path="/projectdetails"
-                                   render={props => <DefaultLayout><ProjectDetails {...props}/></DefaultLayout>}/>
-                        </div>
-                    </Router>
-                </Provider>
-            </ErrorBoundary>
+            <Provider stores={stores}>
+                <Router>
+                    <div className="App">
+                        <Route path="/login" component={Login}/>
+                        <Route path="/register" component={Register}/>
+                        <Route path="/dashboard"
+                               render={props => <DefaultLayout><Dashboard {...props}/></DefaultLayout>}/>
+                        <Route path="/defaultlayout" component={DefaultLayout}/>
+                        <Route path="/profile"
+                               render={props => <DefaultLayout><Profile {...props}/></DefaultLayout>}/>
+                        <Route path="/team" render={props => <DefaultLayout><Team {...props}/></DefaultLayout>}/>
+                        <Route path="/project"
+                               render={props => <DefaultLayout><Project {...props}/></DefaultLayout>}/>
+                        <Route path="/details"
+                               render={props => <DefaultLayout><Details {...props}/></DefaultLayout>}/>
+                        <Route path="/unicode" component={Unicode}/>
+                        <Route path="/homepage" component={HomePage}/>
+                        <Route path="/blog" component={Blog}/>
+                        <Route path="/blogdetails" component={BlogDetails}/>
+                        <Route path="/projectdetails"
+                               render={props => <DefaultLayout><ProjectDetails {...props}/></DefaultLayout>}/>
+                        <Route path="/testvalidation" component={TestValidation}/>
+                    </div>
+                </Router>
+            </Provider>
         );
     }
 }

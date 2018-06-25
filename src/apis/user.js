@@ -2,25 +2,15 @@ import request from '../utils/request';
 
 //登录
 export async function login(data) {
-    if (data.email === 'bugBear@gmail.com' && data.password === '666666') {
-
-        return {
-            status: 'success',
-            token: 'hgsiretyuhhgrtiyuoeuyitri'
-        };
-    }
-
-    return {status: 'fail'};
-    let response = await request.post('http://api.letsgo.tech/login', data);
-
+    let response = await request.post('/login', data);
+    console.log('login response', response);
     return response;
 }
 
 //注册
-export async function register(data){
-
-    return{
-        status:'success',
-        token:'fdhuiftwaogiwpjhgls;a'
-    }
+export async function register(data) {
+    console.log('post reg data:', data);
+    let response = await request.post('/reg', data);
+    console.log('reg response', response);
+    return response;
 }

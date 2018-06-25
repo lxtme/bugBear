@@ -5,7 +5,6 @@ class ProjectDetailsStore{
     @observable visibleEdit=false;
     @observable visibleMore=false;
     @observable visibleAdd=false;
-    @observable memberData = ['aaa', 'sss', 'ddd'];
     @observable projectData = [
         {
             title: 'bugBear',
@@ -32,6 +31,17 @@ class ProjectDetailsStore{
             describe:'bugBear11是一个追踪监控 bug 的系统。'
         },
     ];
+    @observable currentData={
+        title: 'bugBear',
+        name: 'jason0',
+        percent: 36,
+        describe:'bugBear是一个追踪监控 bug 的系统0。'
+    };
+
+    updateCurrentData(item){
+        this.currentData = item;
+        console.log(this.currentData)
+    }
 
     hiddenModal(){
         this.visible=false;

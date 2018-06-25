@@ -45,16 +45,16 @@ class AddModal extends Component {
                     <Form className='baseMessage-page'>
                         <FormItem {...formItemLayout} label="头像">
                         </FormItem>
-                        <FormItem {...formItemLayout} label="名字">
+                        <FormItem {...formItemLayout} label="创建人">
                             {getFieldDecorator('name', {
                                 rules: [{
                                     required: true, message: '名称不能为空'
                                 }]
                             })(
-                                <Input placeholder="jason"/>
+                                <Input placeholder="创建人"/>
                             )}
                         </FormItem>
-                        <FormItem {...formItemLayout} label="名称">
+                        <FormItem {...formItemLayout} label="项目名称">
                             {getFieldDecorator('title', {
                                 rules: [{
                                     required: true, message: '请输入项目名称'
