@@ -8,15 +8,26 @@ import {inject, observer} from 'mobx-react';
 @inject('stores')
 @observer
 class Blog extends Component {
+    constructor(props) {
+        super(props);
+        this.props.stores.blogStore.getBlogListData();
+    }
+
     render() {
         const bloglist = [];
         this.props.stores.blogStore.blogdata.map((blogitem, index) => {
-            console.log(blogitem.content);
             bloglist.push(
-                <Postcard key={index} className="postcard" onClick={() => this.props.history.push('blogdetails')}
-                       content={blogitem.hasOwnProperty('content') ? blogitem.content.substr(0, 80) + '...' : ''}
-                       title={blogitem.title} time={blogitem.time}
-                       name={blogitem.name}/>
+                <Postcard
+                    key={index} className="postcard"
+                    onClick={() => {
+                        this.props.stores.blogStore.setCurrentBlogData(blogitem);
+                        this.props.history.push('blogdetails/' + blogitem.id)
+                    }}
+                    content={blogitem.hasOwnProperty('content') ? blogitem.content.substr(0, 80) + '...' : ''}
+                    title={blogitem.title}
+                    avatar={blogitem.avatar}
+                    time={blogitem.time}
+                    name={blogitem.name}/>
             );
             return blogitem;
         });

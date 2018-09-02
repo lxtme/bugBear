@@ -13,10 +13,11 @@ function callback(key) {
 @observer
 class Bell extends Component {
     render() {
+        const {defaultStore}=this.props.stores;
         let notice = [];
         let news = [];
         let todo = [];
-        this.props.stores.bellStore.messages.map(message => {
+        defaultStore.messages.map(message => {
             if (message.type === 'notice') {
                 notice.push(
                     <li key={message.id} className="bell-item">{message.value}</li>
@@ -36,13 +37,13 @@ class Bell extends Component {
         });
 
         return (
-            <div className="bell-box" style={{display: this.props.stores.bellStore.display}}>
+            <div className="bell-box" style={{display: defaultStore.display}}>
                 <Tabs defaultActiveKey="1" onchange={callback} tabBarGutter={40} tabBarStyle={{padding: '0 30px'}}>
                     <TabPane tab="通知" key="1">
                         <ul className="bell-list">
                             {notice}
                         </ul>
-                        <Button className="bell-clear" onClick={() => this.props.stores.bellStore.handleClear()}>
+                        <Button className="bell-clear" onClick={() => defaultStore.handleClear()}>
                             清空通知
                         </Button>
                     </TabPane>

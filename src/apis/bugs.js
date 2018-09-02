@@ -1,12 +1,12 @@
 import request from '../utils/request';
 
-export async function listBugs(data) {
-
+export async function queryConcernBugs(data) {
+    console.log('api queryconcernbugs', data);
     return {
-        status: 'success',
+        status: 200,
         data: [
             {
-                key: 1,
+                id: 1,
                 message: 'uncaught error ideapar.com',
                 account: 469,
                 userNum: 6977,
@@ -14,7 +14,7 @@ export async function listBugs(data) {
                 time: '1天前',
             },
             {
-                key: 2,
+                id: 2,
                 message: 'ReferenceError https://www.ideapar.com/my-rqt',
                 account: 679,
                 userNum: 6447,
@@ -22,18 +22,33 @@ export async function listBugs(data) {
                 time: '3小时前',
             },
             {
-                key: 3,
+                id: 3,
                 message: 'uncaught error https://www.ideapar.com/',
                 account: 869,
                 userNum: 9877,
                 status: '已修复',
-                time: '5天前',
+                time: '2天前',
             },
         ]
     };
 
-    let response = await request.get(`api.letsgo.tech/bugs?${buildQuery(data)}`);
-    return response;
+    return await request.get(`/123${data}`)
+    //这是之前教我的，现在看不懂
+    // return await request.get(`api.letsgo.tech/bugs?${buildQuery(data)}`);
+}
+
+export async function addComment(commentData) {
+    return {
+        status: 200
+    };
+    return await request.post('/www', commentData)
+}
+
+export async function ignoreBug(bugId) {
+    return {
+        status: 200
+    }
+    return await request.delete('/123', bugId)
 }
 
 //data={
@@ -47,14 +62,4 @@ function buildQuery(data) {
     }
     queryString = queryString.substring(0, queryString.length - 1);
     return queryString
-}
-
-export async function comment(comment) {
-
-    return {
-        status: 'success'
-    };
-    let response = request.post('http://api.letsgo.tech/comment', comment);
-
-    return response;
 }

@@ -17,14 +17,13 @@ class Register extends Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log('values:', values);
                 const data = {
                     email: values.email,
                     password: values.password,
                 };
                 let result = this.props.stores.userStore.register(data);
                 if (result) {
-                    this.props.history.push('/login')
+                    this.props.history.push('/regsuccess')
                 }
             }
         })

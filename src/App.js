@@ -19,6 +19,7 @@ import Blog from './page/Blog';
 import BlogDetails from "./page/Blog/BlogDetails";
 import ProjectDetails from "./page/Profile/Project/ProjectDetails";
 import TestValidation from "./page/TestValidation";
+import RegSuccess from "./page/Register/RegSuccess";
 
 @observer
 class App extends Component {
@@ -27,8 +28,10 @@ class App extends Component {
             <Provider stores={stores}>
                 <Router>
                     <div className="App">
+                        <Route path="/" exact component={HomePage}/>
                         <Route path="/login" component={Login}/>
                         <Route path="/register" component={Register}/>
+                        <Route path="/regsuccess" component={RegSuccess}/>
                         <Route path="/dashboard"
                                render={props => <DefaultLayout><Dashboard {...props}/></DefaultLayout>}/>
                         <Route path="/defaultlayout" component={DefaultLayout}/>
@@ -40,9 +43,8 @@ class App extends Component {
                         <Route path="/details"
                                render={props => <DefaultLayout><Details {...props}/></DefaultLayout>}/>
                         <Route path="/unicode" component={Unicode}/>
-                        <Route path="/homepage" component={HomePage}/>
                         <Route path="/blog" component={Blog}/>
-                        <Route path="/blogdetails" component={BlogDetails}/>
+                        <Route path="/blogdetails/:id" component={BlogDetails}/>
                         <Route path="/projectdetails"
                                render={props => <DefaultLayout><ProjectDetails {...props}/></DefaultLayout>}/>
                         <Route path="/testvalidation" component={TestValidation}/>

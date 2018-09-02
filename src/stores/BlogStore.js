@@ -1,31 +1,32 @@
 import {observable} from 'mobx';
+import {message} from 'antd';
+import {getBlogListData,getBlogDetails} from '../apis/blog.js'
 
 class BlogStore {
-    @observable blogdata = [
-        {
-            content: "BugBear can achieve teal-time monitoring.BugBear can achieve\n" +
-            "                                    teal-time monitoring.",
-            time: '2018.6.1',
-            title: "jason is a good good good",
-            name: "chang",
-        },
-        {
-            content: "BugBear can achieve teal-time monitoring.BugBear can achieve teal-time " +
-            "monitoring.BugBear can achieve teal-time monitoring.BugBear can achieve teal-time " +
-            "monitoring.",
-            title: "BugBear can achieve teal-time monitoring.",
-            time: "2018.4.7",
-            name: "jason"
-        },
-        {
-            title: "bugbear", time: '2018.3.6', name: "tian"
-        },
-        {
-            title: "bugbugbug", time: '2018.6.6', name: "bear"
-        },
-        {
-            title: "bearbear", time: '2018.6.11', name: "sweet"
+    @observable blogdata = [];
+    @observable currentBlogData = {};
+
+    setCurrentBlogData(currentBlogData) {
+        this.currentBlogData = currentBlogData;
+    }
+
+    async getBlogListData() {
+        const result = await getBlogListData();
+        if (result.status === 200) {
+            this.blogdata = result.data;
+            return;
         }
-    ];
+        message.error('数据获取失败，请稍后再试')
+    }
+
+    async getBlogDetails(id) {
+        const result = await getBlogDetails(id);
+        if (result.status === 200) {
+            this.currentBlogData = result.data;
+            return;
+        }
+        message.error('数据获取失败，请稍后再试')
+    }
 }
+
 export default BlogStore;

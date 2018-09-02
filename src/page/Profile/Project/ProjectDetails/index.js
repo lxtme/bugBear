@@ -17,6 +17,7 @@ const transactor = (
 
 function handleClick(e) {
     console.log('chick', e)
+
 }
 
 function callback(e) {
@@ -26,7 +27,17 @@ function callback(e) {
 @inject('stores')
 @observer
 class ProjectDetails extends Component {
+
+    switchAttention = () => {
+        const isAttention = {
+            isAttention: true,
+        };
+        this.props.stores.projectStore.updateIsAttention(isAttention);
+
+    };
+
     render() {
+        const {projectStore} = this.props.stores;
         return (
             <div className='projectDetails-page'>
                 <div className="details-top">
@@ -36,14 +47,21 @@ class ProjectDetails extends Component {
                         <span>创建时间：2018-6-5</span><br/>
                     </div>
                     <div className="details-top-r">
-                        <div>
-                            <Button onClick={() => this.props.stores.projectDetailsStore.showModal()}>评论</Button>
-                            <Button>关注</Button>
+                        <div className="btns">
+                            <Button onClick={() => projectStore.showModal()}>评论</Button>
+                            <Button
+                                style={projectStore.isAttention ? {
+                                    background: '#1890ff',
+                                    color: 'white'
+                                } : {background: 'white'}}
+                                onClick={this.switchAttention}>
+                                {projectStore.isAttention ? '已关注' : '关注'}
+                            </Button>
                             <Dropdown overlay={transactor}>
                                 <Button type="primary">执行人</Button>
                             </Dropdown>
                         </div>
-                        <div className="details-top-r-number">
+                        <div className="numbers">
                             <div>
                                 <span>状态</span><br/>
                                 <span>待审批</span>
@@ -58,9 +76,9 @@ class ProjectDetails extends Component {
                             </div>
                         </div>
                     </div>
-                    <CommentModal visible={this.props.stores.projectDetailsStore.visible}/>
+
                 </div>
-                <Tabs onChange={callback} style={{marginLeft:30}}>
+                <Tabs onChange={callback} style={{marginLeft: 30}}>
                     <TabPane tab="概览" key="1">概览</TabPane>
                     <TabPane tab="基本信息" key="2">
                         <BaseMessage/>
@@ -70,6 +88,7 @@ class ProjectDetails extends Component {
                     <TabPane tab="source map" key="5">Content of Tab Pane 2</TabPane>
                     <TabPane tab="成员列表" key="6">Content of Tab Pane 3</TabPane>
                 </Tabs>
+                <CommentModal visible={projectStore.visible}/>
             </div>
         )
     }

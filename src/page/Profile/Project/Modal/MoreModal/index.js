@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Form, Input, Modal, Button} from "antd/lib/index";
 import {inject, observer} from 'mobx-react';
-import '../index.less';
+import '../../index.less'
 
 const FormItem = Form.Item;
 const formItemLayout = {
@@ -16,42 +16,63 @@ const formItemLayout = {
 @inject('stores')
 @observer
 class MoreModal extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props);
         this.state = {
-            memberData: ['aaa', 'sss', 'ddd']
+            memberData: ['aaa', 'sss', 'ddd'],
+            showMemberDataError: false,
         };
+        this.projectStore = props.stores.projectStore;
     }
 
     handleOk = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log('values:', values);
+                const projectData = {
+                    title: values.title,
+                    manager: values.manager,
+                };
+                console.log('aaa',projectData);
+                if (this.state.memberData.length) {
+                    this.setState({
+                        showMemberDataError: true
+                    })
+                }
+                projectData.memberData = this.state.memberData;
+
+                this.projectStore.updateProjectMoreMessage(projectData);
             }
         });
-        this.props.stores.projectDetailsStore.hiddenModalMore();
+        this.projectStore.hiddenModalMore();
     };
     handleClick = () => {
         const addMember = this.refs.myInput.value;
-        console.log(addMember);
         this.setState({
-            memberData: [...this.state.memberData,addMember]
+            memberData: [...this.state.memberData, addMember]
         })
+
+        if (!this.state.memberData.length) {
+            this.setState({
+                showMemberDataError: false
+            })
+        }
 
     };
 
     render() {
         const {getFieldDecorator} = this.props.form;
+        const projectStore = this.projectStore;
         return (
-            <div>
-                <Modal visible={this.props.visible} title={'编辑'} className='more-modal'
-                       onCancel={() => this.props.stores.projectDetailsStore.hiddenModalMore()}
-                       onOk={this.handleOk}>
-                    <Form className='baseMessage-page '>
+            <Modal visible={this.props.visible}
+                   title={'编辑'}
+                   onCancel={() => projectStore.hiddenModalMore()}
+                   onOk={this.handleOk}>
+                <div className='more-modal'>
+                    <Form>
                         <FormItem {...formItemLayout} label="项目名称">
                             {getFieldDecorator('title', {
-                                initialValue: this.props.stores.projectDetailsStore.currentData.title,
+                                initialValue: projectStore.currentData.title,
                                 rules: [{
                                     required: true, message: '名称不能为空'
                                 }]
@@ -62,28 +83,23 @@ class MoreModal extends Component {
                         <FormItem {...formItemLayout} label="管理员">
                             {getFieldDecorator('manager', {
                                 rules: [{
-                                    required: true, message: '管理员'
+                                    required: true, message: '管理员不能为空'
                                 }]
                             })(
                                 <Input placeholder="jason"/>
                             )}
                         </FormItem>
                         <FormItem {...formItemLayout} label='成员'>
-                            {getFieldDecorator(' member', {
-                                rules: [{
-                                    required: true, message: '成员'
-                                }]
-                            })(
-                                <ul className='member-list'>{this.state.memberData.map((item, index) => {
-                                    return (<li key={index}>{item}</li>)
-                                })}</ul>
-                            )}
+                            <ul className='member-list'>{this.state.memberData.map((item, index) => {
+                                return (<li key={index}>{item}</li>)
+                            })}</ul>
+                            <p style={{display: this.state.showMemberDataError ? 'block' : 'none'}}>至少需要有一个成员</p>
                         </FormItem>
                     </Form>
                     <input className='add-input' ref='myInput'/>
                     <Button className='add-btn' onClick={this.handleClick}>添加</Button>
-                </Modal>
-            </div>
+                </div>
+            </Modal>
         )
     }
 }

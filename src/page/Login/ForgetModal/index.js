@@ -11,7 +11,6 @@ class ForgetModal extends Component {
     handleOk() {
         this.props.form.validateFields((err,values)=>{
             if(!err){
-                console.log('forget-email',values);
                 this.props.stores.userStore.hiddenForget();
             }
         });

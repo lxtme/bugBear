@@ -46,7 +46,6 @@ function browserSum() {
     for (let i = 0; i < browserPercents.length; i++) {
         sum = sum + browserPercents[i].value;
     }
-    console.log(sum);
     return sum;
 }
 

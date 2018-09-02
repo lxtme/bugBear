@@ -11,36 +11,37 @@ const formItemLayout = {
         span: 16
     }
 };
-const Option = Select.Option;
 
 @inject('stores')
 @observer
 class AddModal extends Component {
+    constructor(props){
+        super(props);
+        this.projectStore=this.props.stores.projectStore;
+    }
     handleOk = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log('values:', values);
-            }
-            console.log(this.props.stores.projectDetailsStore.projectData.slice());
-            this.props.stores.projectDetailsStore.projectData.push(
-                {
+                const createProjectData= {
                     key: values.title,
                     name: values.name,
                     title: values.title,
                     describe:values.describe,
-                }
-            )
+                };
+                this.projectStore.createProject(createProjectData);
+            }
         });
-        this.props.stores.projectDetailsStore.hiddenModalAdd();
+        this.projectStore.hiddenModalAdd();
     };
 
     render() {
         const {getFieldDecorator} = this.props.form;
+        const projectStore=this.projectStore;
         return (
             <div>
                 <Modal visible={this.props.visible} title={'添加'}
-                       onCancel={() => this.props.stores.projectDetailsStore.hiddenModalAdd()}
+                       onCancel={() => projectStore.hiddenModalAdd()}
                        onOk={this.handleOk}>
                     <Form className='baseMessage-page'>
                         <FormItem {...formItemLayout} label="头像">

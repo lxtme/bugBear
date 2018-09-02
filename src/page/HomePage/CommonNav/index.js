@@ -35,9 +35,9 @@ class CommonNav extends Component {
                                     ThinBug
                                 </div>
                                 <ul>
-                                    <li onClick={() => this.props.history.push('/homepage')}>首页</li>
-                                    <li onClick={() => this.props.history.push('/homepage')}>产品</li>
-                                    <li onClick={() => this.props.history.push('/homepage')}>文档</li>
+                                    <li onClick={() => this.props.history.push('/')}>首页</li>
+                                    <li onClick={() => this.props.history.push('/')}>产品</li>
+                                    <li onClick={() => this.props.history.push('/')}>文档</li>
                                     <li onClick={() => this.props.history.push('/blog')}>博客</li>
                                     <li onClick={() => this.props.history.push('/homepage')}>关于</li>
                                     <li onClick={() => this.props.history.push('/dashboard')}>控制台</li>

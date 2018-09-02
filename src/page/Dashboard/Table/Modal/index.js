@@ -8,21 +8,21 @@ const {TextArea} = Input;
 @inject('stores')
 @observer
 class CommentModal extends Component {
+    constructor(props){
+        super(props);
+        this.bugStore=this.props.stores.bugStore
+    }
     handleSubmit() {
         this.props.form.validateFields((err, value) => {
             if (!err) {
-                console.log('value:', value);
-                const key = this.props.stores.bugStore.commentKey;
-                console.log(key);
-                const comment = {
-                    value: value.comment,
-                    key: key
+                const commentData = {
+                    comment: value.comment,
+                    key: this.bugStore.currentCommentKey,
                 };
-                console.log(comment);
-                this.props.stores.bugStore.commentDate(comment);
+                this.bugStore.addComment(commentData);
             }
         });
-        this.props.stores.bugStore.hiddenModal()
+        this.bugStore.hiddenModal()
     }
 
     render() {
@@ -31,12 +31,8 @@ class CommentModal extends Component {
         return (
             <div>
                 <Modal visible={this.props.visible}
-                       onOk={() => {
-                           this.handleSubmit()
-                       }}
-                       onCancel={() => {
-                           this.props.stores.bugStore.hiddenModal()
-                       }}
+                       onOk={() => {this.handleSubmit()}}
+                       onCancel={() => {this.bugStore.hiddenModal()}}
                        title='评论'>
                     <Form>
                         <FormItem>

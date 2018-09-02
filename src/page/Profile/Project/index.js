@@ -1,53 +1,61 @@
 import React, {Component} from 'react';
 import {Input, List, Avatar, Progress, Icon} from 'antd';
 import './index.less';
-import EditModal from "./EditModal";
+import EditModal from "./Modal/EditModal";
 import {inject, observer} from 'mobx-react';
-import MoreModal from './MoreModal';
-import AddModal from "./AddModal";
-
+import MoreModal from './Modal/MoreModal';
+import AddModal from "./Modal/AddModal";
 
 const Search = Input.Search;
-
 
 @inject('stores')
 @observer
 class Project extends Component {
+    constructor(props) {
+        super(props);
+        this.projectStore = this.props.stores.projectStore;
+        this.projectStore.getProjectData();
+    }
+
     editClick = (item) => {
-        console.log('ddd');
-        this.props.stores.projectDetailsStore.showModalEdit();
-        console.log(item);
-        this.props.stores.projectDetailsStore.updateCurrentData(item);
+        this.projectStore.showModalEdit();
+        this.projectStore.updateCurrentData(item);
     };
     moreClick = (item) => {
-        console.log('ddd');
-        this.props.stores.projectDetailsStore.showModalMore();
-        console.log(item);
-        this.props.stores.projectDetailsStore.updateCurrentData(item)
+        this.projectStore.showModalMore();
+        this.projectStore.updateCurrentData(item)
     };
-    addClick = (record) => {
-        console.log('ddd');
-        this.props.stores.projectDetailsStore.showModalAdd();
-        console.log(record);
+    addClick = () => {
+        this.projectStore.showModalAdd();
     };
 
     render() {
+        const projectStore = this.projectStore;
         return (
-            <div className="profile-page">
-                <span className="profile-title">项目列表</span>
-                <div className="team">
-                    <Search onSearch={value => console.log(value)} style={{width: 300}}/>
-                    <div className='team-add'>
+            <div className="project-page">
+                <span className="title">项目列表</span>
+                <div className="content">
+                    <Search className='search' onSearch={value => console.log(value)}/>
+                    <div className='add'>
                         <a onClick={this.addClick}>添加</a>
                     </div>
-                    <List dataSource={this.props.stores.projectDetailsStore.projectData}
+                    <List dataSource={projectStore.projectData}
                           renderItem={item => (
-                              <List.Item actions={[<a
-                                  onClick={()=>this.editClick(item)}>编辑</a>,
-                                  <a onClick={()=>this.moreClick(item)}>更多&nbsp;&nbsp;&nbsp;&nbsp;<Icon type="down"/></a>]}>
-                                  <List.Item.Meta avatar={<Avatar>J</Avatar>}
-                                                  title={item.title}
-                                                  description={item.describe}/>
+                              <List.Item
+                                  actions={[
+                                      <a onClick={() => this.editClick(item)}>编辑</a>,
+                                      <a onClick={() => this.moreClick(item)}>
+                                          更多
+                                          <Icon type="down"/>
+                                      </a>
+                                  ]}>
+                                  <List.Item.Meta
+                                      avatar={
+                                          <Avatar
+                                              src={item.avatar}>{item.avatar === '' ? item.name.substring(0, 1) : ''}
+                                          </Avatar>}
+                                      title={item.title}
+                                      description={item.describe}/>
                                   <div className="project-list-content">
                                       <div className="project-list-name">
                                           <span>创建人：</span><br/>
@@ -62,9 +70,9 @@ class Project extends Component {
                               </List.Item>
                           )}/>
                 </div>
-                <EditModal visible={this.props.stores.projectDetailsStore.visibleEdit}/>
-                <MoreModal visible={this.props.stores.projectDetailsStore.visibleMore}/>
-                <AddModal visible={this.props.stores.projectDetailsStore.visibleAdd}/>
+                <EditModal visible={projectStore.visibleEdit}/>
+                <MoreModal visible={projectStore.visibleMore}/>
+                <AddModal visible={projectStore.visibleAdd}/>
             </div>
         )
     }

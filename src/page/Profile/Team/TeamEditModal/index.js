@@ -6,24 +6,28 @@ const FormItem = Form.Item;
 
 @inject('stores')
 @observer
-class TeamModal extends Component {
+class TeamEditModal extends Component {
+    constructor(props){
+        super(props);
+        this.profileStore=this.props.stores.profileStore;
+    }
     handleOk=()=> {
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log('values:', values);
-                this.props.stores.profileStore.hiddenModal();
+                this.profileStore.hiddenTeamEditModal();
                 const teamData={
                     email:values.email,
                     phone:values.phone,
                     name:values.name,
                 };
-                console.log(teamData);
-                this.props.stores.profileStore.teamSet(teamData);
+                this.profileStore.setTeamData(teamData);
             }
         })
     };
     render() {
         const {getFieldDecorator} = this.props.form;
+        const {profileStore}=this.props.stores;
+        const {teamData}=profileStore;
         const formItemLayout = {
             labelCol: {
                 span: 4
@@ -36,12 +40,12 @@ class TeamModal extends Component {
         return (
             <div>
                 <Modal visible={this.props.visible} title="编辑团队信息"
-                       onCancel={() => this.props.stores.profileStore.hiddenModal()}
+                       onCancel={() => profileStore.hiddenTeamEditModal()}
                        onOk={() =>this.handleOk()}>
                     <Form>
                         <FormItem {...formItemLayout} label="昵称">
                             {getFieldDecorator('name', {
-                                initialValue:this.props.stores.profileStore.teamInformation.name,
+                                initialValue:teamData.name,
                                 rules: [{
                                     required: true, message: '昵称不能为空'
                                 }]
@@ -50,11 +54,11 @@ class TeamModal extends Component {
                             )}
                         </FormItem>
                         <FormItem {...formItemLayout} label="创建时间">
-                                <Input readonly='readonly' value={this.props.stores.profileStore.teamInformation.time}/>
+                                <Input readOnly='readOnly' value={teamData.time}/>
                         </FormItem>
                         <FormItem {...formItemLayout} label="邮箱">
                             {getFieldDecorator('email', {
-                                initialValue:this.props.stores.profileStore.teamInformation.email,
+                                initialValue:teamData.email,
                                 rules: [{
                                     type: 'email', message: '请输入有效的邮箱地址'
                                 }, {
@@ -71,4 +75,4 @@ class TeamModal extends Component {
     }
 }
 
-export default Form.create()(TeamModal);
+export default Form.create()(TeamEditModal);

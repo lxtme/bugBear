@@ -11,7 +11,6 @@ class CommentModal extends Component {
     handleOk = () => {
         this.props.form.validateFields((err, value) => {
             if (!err) {
-                console.log('comment', value);
                 this.props.stores.detailsStore.hiddenModal();
             }
         })

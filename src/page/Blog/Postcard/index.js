@@ -19,7 +19,10 @@ class Postcard extends Component {
                                 <p className="content">{this.props.content}</p>
                             </div>
                             <div className="attribution">
-                                <Avatar className="attribution-avatar">J</Avatar>
+                                <Avatar className="attribution-avatar"
+                                        src={this.props.avatar}>
+                                    {this.props.avatar===''?this.props.name.substring(0,1):''}
+                                    </Avatar>
                                 <span className="attribution-name">{this.props.name}</span>
                             </div>
                         </div>

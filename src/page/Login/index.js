@@ -14,14 +14,11 @@ class Login extends Component {
         e.preventDefault();
         this.props.form.validateFields(async (err, values) => {
                 if (!err) {
-                    console.log(values);
                     const data = {
                         email: values.email,
                         password: values.password
                     };
-                    console.log('data', data);
                     let result = await this.props.stores.userStore.login(data);
-                    console.log('result', result);
                     if (result) {
                         this.props.history.push('/dashboard')
                     }

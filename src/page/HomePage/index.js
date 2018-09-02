@@ -22,7 +22,7 @@ class HomePage extends Component {
                                 </p>
                                 <div>
                                     <Button className="start-btn">开始使用</Button>
-                                    <Button className="why-btn">why</Button>
+                                    <Button className="why-btn">How</Button>
                                 </div>
                             </div>
                             <div className="start-r">

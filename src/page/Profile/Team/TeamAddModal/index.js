@@ -7,11 +7,14 @@ const FormItem = Form.Item;
 @inject('stores')
 @observer
 class TeamAddModal extends Component {
+    constructor(props){
+        super(props);
+        this.profileStore=this.props.stores.profileStore;
+    }
     handleOk = () => {
         this.props.form.validateFields((err, value) => {
             if (!err) {
-                console.log(value);
-                this.props.stores.profileStore.teamMember.push(
+                this.profileStore.teamData.teamMember.push(
                     {
                         key: value.email,
                         name: 'lixiao',
@@ -21,7 +24,7 @@ class TeamAddModal extends Component {
                         operate: '删除'
                     }
                 );
-                this.props.stores.profileStore.hiddenModalAdd();
+                this.profileStore.hiddenTeamAddModal();
             }
         })
     };
@@ -31,7 +34,7 @@ class TeamAddModal extends Component {
         return (
             <div>
                 <Modal visible={this.props.visible} title="添加团队成员" onOk={() => this.handleOk()}
-                       onCancel={() => this.props.stores.profileStore.hiddenModalAdd()}>
+                       onCancel={() => this.profileStore.hiddenTeamAddModal()}>
                     <Form>
                         <FormItem labelCol={{span: 4}} wrapperCol={{span: 18}} label="邮箱">
                             {getFieldDecorator('email', {

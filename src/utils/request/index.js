@@ -2,7 +2,7 @@ import axios from 'axios';
 
 let request = axios;
 
-request.defaults.baseURL = "http://api-thinbug.letsgo.tech";
+request.defaults.baseURL = "http://192.168.0.109:8088";
 request.interceptors.response.use((response) => {
     // 请求结束，蓝色过渡滚动条消失
     console.log('kkkkkkkkk', response);

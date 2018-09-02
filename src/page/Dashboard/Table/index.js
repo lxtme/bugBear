@@ -19,11 +19,47 @@ const rowSelection = {
 @observer
 class Table extends Component {
     constructor(props) {
-        super();
-        props.stores.bugStore.listBugs()
+        super(props);
+        this.state = {
+            keyword: '',
+            condition: '',
+        };
+        this.bugStore = props.stores.bugStore;
     }
 
+    componentDidMount() {
+        this.queryConcernBugs()
+    }
+
+    conditionChange = (value) => {
+        this.setState({
+            condition: value
+        })
+    };
+    keywordChange = (event) => {
+        this.setState({
+            keyword: event.target.value,
+        })
+    };
+    queryConcernBugs = () => {
+        const queryBugsData = {
+            keyword: this.state.keyword,
+            condition: this.state.condition,
+        };
+        this.bugStore.queryConcernBugs(queryBugsData)
+    };
+    resettingClick = () => {
+        this.setState({
+            keyword: '',
+            condition: '',
+        },
+            ()=>this.queryConcernBugs(),
+        );
+
+    };
+
     render() {
+        const {bugStore} = this.props.stores;
         const columns = [
             {
                 title: '信息',
@@ -82,11 +118,11 @@ class Table extends Component {
                     <div>
                         <a onClick={() => {
                             message.success('该错误将不在展示，可以通过筛选状态已忽略查看');
-                            this.props.stores.bugStore.ignore(record)
-                        }
-                        }>忽略</a>&nbsp;&nbsp;
+                            bugStore.ignoreBug(record.id)
+                        }}>忽略
+                        </a>
                         <a onClick={() => {
-                            this.props.stores.bugStore.comment(record.key)
+                            bugStore.setCurrentCommentKey(record.id)
                         }}>评论</a>
                     </div>
                 )
@@ -94,28 +130,34 @@ class Table extends Component {
         ];
 
         return (
-            <div className="table-box">
-                <CommentModal visible={this.props.stores.bugStore.visible}/>
-                <Form layout="inline" style={{marginBottom:20}}>
+            <div className="table-section">
+                <CommentModal visible={bugStore.visible}/>
+                <Form layout="inline" style={{marginBottom: 20}}>
                     <FormItem label="关键词">
-                        <Input placeholder="请输入" style={{width: 220}}/>
+                        <Input placeholder="请输入"
+                               type="text"
+                               value={this.state.keyword}
+                               onChange={this.keywordChange}
+                               style={{width: 220}}/>
                     </FormItem>
                     <FormItem label="状态">
-                        <Select defaultValue="请输入" style={{width: 220}}>
+                        <Select value={this.state.condition}
+                                onChange={this.conditionChange}
+                                style={{width: 220}}>
                             <Option value="待定">待定</Option>
                             <Option value="进行中">进行中</Option>
                             <Option value="已修复">已修复</Option>
                         </Select>
                     </FormItem>
                     <FormItem>
-                        <Button>查询</Button>
+                        <Button onClick={this.queryConcernBugs}>查询</Button>
                     </FormItem>
                     <FormItem>
-                        <Button>重置</Button>
+                        <Button onClick={this.resettingClick}>重置</Button>
                     </FormItem>
                 </Form>
                 <TableAntd rowSelection={rowSelection} columns={columns}
-                           dataSource={this.props.stores.bugStore.bugs.slice()}/>
+                           dataSource={bugStore.bugs.slice()}/>
             </div>
         )
     }

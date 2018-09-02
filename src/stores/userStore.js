@@ -1,14 +1,16 @@
 import {observable} from 'mobx';
-import {login, register} from '../apis/user';
+import {login, register,getUserInform} from '../apis/user';
 import {message} from 'antd';
 
 class UserStore {
     @observable token = '';
     @observable visibleForget = false;
-    hiddenForget(){
+
+    hiddenForget() {
         this.visibleForget = false
     }
-    showForget(){
+
+    showForget() {
         this.visibleForget = true
     }
 
@@ -17,7 +19,6 @@ class UserStore {
         if (result.status === 200) {
             message.success(' 登录成功');
             this.token = result.data.token;
-            console.log('token:', this.token);
 
             return true;
         }
@@ -30,15 +31,14 @@ class UserStore {
         if (result.status === 200) {
             message.success('注册成功');
             // this.token = result.token;
-            // console.log('register token:', this.token);
 
             return true;
         }
         message.error('注册失败');
         return false;
     }
-}
 
+}
 
 
 export default UserStore;

@@ -8,11 +8,18 @@ const {TextArea} = Input;
 @inject('stores')
 @observer
 class CommentModal extends Component {
+    constructor(props){
+        super(props);
+        this.projectStore=this.props.stores.projectStore;
+    }
     handleOk = () => {
         this.props.form.validateFields((err, value) => {
             if (!err) {
-                console.log('comment', value);
-                this.props.stores.projectDetailsStore.hiddenModal();
+                this.projectStore.hiddenModal();
+                const commentData={
+                    comment:value.comment,
+                };
+                this.projectStore.commitComment(commentData);
             }
         })
     };
@@ -22,7 +29,7 @@ class CommentModal extends Component {
         return (
             <div>
                 <Modal visible={this.props.visible} title='评论' onOk={() => this.handleOk()}
-                       onCancel={() => this.props.stores.projectDetailsStore.hiddenModal()}>
+                       onCancel={() => this.projectStore.hiddenModal()}>
                     <Form>
                         <FormItem>
                             {getFieldDecorator('comment', {

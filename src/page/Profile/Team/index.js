@@ -1,14 +1,21 @@
 import React, {Component} from 'react';
 import {Avatar, Alert, Table} from 'antd';
 import {observer, inject} from 'mobx-react';
-import TeamModal from './TeamModal';
+import TeamEditModal from './TeamEditModal';
 import TeamAddModal from "./TeamAddModal";
 
 @inject('stores')
 @observer
 class Team extends Component {
+    constructor(props) {
+        super(props);
+        this.props.stores.profileStore.getTeamData();
+    }
+
     render() {
-        const teamColumns = [
+        const {profileStore} = this.props.stores;
+        const {teamData} = profileStore;
+        const columns = [
             {
                 title: '昵称',
                 dataIndex: 'name',
@@ -34,36 +41,41 @@ class Team extends Component {
                 dataIndex: 'operate',
                 key: 'operate',
                 render: (text, record) => (
-                    <a onClick={() => this.props.stores.profileStore.deleteMember(record)}>删除</a>
+                    <a onClick={() => profileStore.deleteTeamMember(record.id)}>删除</a>
                 )
             }
         ];
         return (
-            <div className="profile-page">
+            <div className="team-page">
                 <div>
-                    <span className="profile-title">团队信息</span>
-                    <span className="profile-btn"
-                          onClick={() => this.props.stores.profileStore.showModal()}><a>编辑</a></span><br/>
-                    <span className="profile-label">头像：</span>
-                    <span className="profile-value">
-                        <Avatar>{this.props.stores.profileStore.teamInformation.avatar}</Avatar></span><br/>
-                    <span className="profile-label">名称</span>
-                    <span className="profile-value">{this.props.stores.profileStore.teamInformation.name}</span><br/>
-                    <span className="profile-label">邮箱</span>
-                    <span className="profile-value">{this.props.stores.profileStore.teamInformation.email}</span><br/>
-                    <span className="profile-label">创建时间</span>
-                    <span className="profile-value">{this.props.stores.profileStore.teamInformation.time}</span><br/>
+                    <div className="title-box">
+                        <span className="title">团队信息</span>
+                        <span className="btn"
+                              onClick={() => profileStore.showTeamEditModal()}><a>编辑</a></span><br/>
+                    </div>
+                    <div className="content">
+                        <span className="profile-label">头像：</span>
+                        <span>
+                        <Avatar>{teamData.avatar}</Avatar>
+                        </span><br/>
+                        <span className="profile-label">名称：</span>
+                        <span>{teamData.name}</span><br/>
+                        <span className="profile-label">邮箱：</span>
+                        <span>{teamData.email}</span><br/>
+                        <span className="profile-label">创建时间：</span>
+                        <span>{teamData.time}</span><br/>
+                    </div>
                 </div>
-                <div style={{marginTop: 50}}>
-                    <span className="profile-title">团队成员</span>
-                    <span className="profile-btn"><a
-                        onClick={() => this.props.stores.profileStore.showModalAdd()}>添加</a></span>
-                    <Alert type="info" message="共13人" showIcon style={{width: 1200}}/>
-                    <Table dataSource={this.props.stores.profileStore.teamMember.slice()} columns={teamColumns}
-                           style={{width: 1200}}/>
+                <div className='table-section'>
+                    <div className="title-box">
+                        <span className="title">团队成员</span>
+                        <span className="btn"><a onClick={() => profileStore.showTeamAddModal()}>添加</a></span>
+                    </div>
+                    <Alert className='alert' type="info" message="共13人" showIcon/>
+                    <Table className='table' dataSource={teamData.teamMember.slice()} columns={columns}/>
                 </div>
-                <TeamModal visible={this.props.stores.profileStore.visible}/>
-                <TeamAddModal visible={this.props.stores.profileStore.visibleAdd}/>
+                <TeamEditModal visible={profileStore.teamEditModalVisible}/>
+                <TeamAddModal visible={profileStore.teamAddModalVisible}/>
             </div>
         )
     }
